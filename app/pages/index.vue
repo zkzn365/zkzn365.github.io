@@ -94,6 +94,6 @@
 
 <script setup>
 useHead({
-  title: '智科智能 - AI智能体·小程序·跨境电商定制开发'
+  title: '中科智农 - AI智能体·小程序·跨境电商定制开发'
 })
 </script>

@@ -3,6 +3,11 @@
     <div class="container-x">
       <h1 class="text-3xl font-bold mb-8 text-center">联系我们</h1>
       <div class="max-w-xl mx-auto bg-white shadow-sm p-8 rounded-xl">
+        <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+          <p class="text-gray-700"><strong>电话：</strong>0086-13997366845</p>
+          <p class="text-gray-700"><strong>邮箱：</strong>wangleihd@gmail.com</p>
+          <p class="text-gray-700"><strong>地址：</strong>中国(云南)自由贸易试验区昆明片区经开区顺通大道31号国际珠宝城6栋4层F407-22</p>
+        </div>
         <form class="space-y-4" @submit.prevent="handleSubmit">
           <div>
             <label class="block mb-2 font-medium">公司/姓名</label>
@@ -43,6 +48,6 @@ const handleSubmit = () => {
 }
 
 useHead({
-  title: '联系我们 - 智科智能'
+  title: '联系我们 - 中科智农'
 })
 </script>

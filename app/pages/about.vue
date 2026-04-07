@@ -7,7 +7,7 @@
         <div class="bg-white p-8 rounded-xl shadow-sm">
           <h2 class="text-2xl font-bold mb-4 text-primary">关于我们</h2>
           <p class="text-gray-700 leading-relaxed">
-            智科智能是一家专注于企业数字化定制开发的技术公司，致力于为客户提供AI智能体开发、小程序开发、跨境电商平台搭建等一站式解决方案。我们拥有多年行业经验的技术团队，为200+企业提供了优质的技术服务。
+            中科智农（云南）科技有限责任公司是一家专注于企业数字化定制开发的技术公司，致力于为客户提供AI智能体开发、小程序开发、跨境电商平台搭建等一站式解决方案。我们拥有多年行业经验的技术团队，为200+企业提供了优质的技术服务。
           </p>
         </div>
 
@@ -36,10 +36,11 @@
         <div class="bg-white p-8 rounded-xl shadow-sm">
           <h2 class="text-2xl font-bold mb-4 text-primary">联系方式</h2>
           <div class="space-y-3 text-gray-700">
-            <p>📍 地址：某某市某某区某某大厦</p>
-            <p>📞 电话：138xxxx8888</p>
-            <p>📧 邮箱：contact@zkzn365.com</p>
+            <p>📍 地址：中国(云南)自由贸易试验区昆明片区经开区顺通大道31号国际珠宝城6栋4层F407-22</p>
+            <p>📞 电话：0086-13997366845</p>
+            <p>📧 邮箱：wangleihd@gmail.com</p>
             <p>🌐 网站：www.zkzn365.com</p>
+            <p>📮 邮编：650501</p>
           </div>
         </div>
       </div>
@@ -49,6 +50,6 @@
 
 <script setup>
 useHead({
-  title: '关于我们 - 智科智能'
+  title: '关于我们 - 中科智农'
 })
 </script>

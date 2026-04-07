@@ -66,6 +66,6 @@
 
 <script setup>
 useHead({
-  title: '服务项目 - 智科智能'
+  title: '服务项目 - 中科智农'
 })
 </script>

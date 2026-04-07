@@ -35,6 +35,6 @@
 
 <script setup>
 useHead({
-  title: '成功案例 - 智科智能'
+  title: '成功案例 - 中科智农'
 })
 </script>

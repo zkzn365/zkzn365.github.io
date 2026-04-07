@@ -3,7 +3,7 @@
     <!-- 导航栏 -->
     <header class="sticky top-0 bg-white shadow-sm z-50">
       <div class="container-x py-4 flex justify-between items-center">
-        <NuxtLink to="/" class="text-xl font-bold text-primary">智科智能</NuxtLink>
+        <NuxtLink to="/" class="text-xl font-bold text-primary">中科智农</NuxtLink>
         <nav class="hidden md:flex gap-6">
           <NuxtLink to="/" class="hover:text-primary transition">首页</NuxtLink>
           <NuxtLink to="/services" class="hover:text-primary transition">服务项目</NuxtLink>
@@ -25,7 +25,7 @@
       <div class="container-x">
         <div class="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 class="text-lg font-bold mb-4">智科智能</h3>
+            <h3 class="text-lg font-bold mb-4">中科智农（云南）科技有限责任公司</h3>
             <p class="text-gray-300">专注企业数字化定制开发</p>
           </div>
           <div>
@@ -38,12 +38,12 @@
           </div>
           <div>
             <h4 class="font-semibold mb-3">联系我们</h4>
-            <p class="text-gray-300">电话：138xxxx8888</p>
-            <p class="text-gray-300">邮箱：contact@zkzn365.com</p>
+            <p class="text-gray-300">电话：0086-13997366845</p>
+            <p class="text-gray-300">邮箱：wangleihd@gmail.com</p>
           </div>
         </div>
         <div class="mt-8 pt-4 border-t border-gray-700 text-center text-gray-400">
-          © 2026 智科智能 版权所有
+          © 2026 中科智农（云南）科技有限责任公司 版权所有
         </div>
       </div>
     </footer>
