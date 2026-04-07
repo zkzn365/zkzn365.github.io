@@ -1,0 +1,44 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="联系我们 - 中科智农">
+  <section class="py-20 bg-slate-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center text-white">联系我们</h1>
+      
+      <div class="max-w-xl mx-auto">
+        <div class="mb-8 p-6 bg-slate-800/50 border border-slate-700 rounded-2xl">
+          <h2 class="text-xl font-bold mb-4 text-white">联系方式</h2>
+          <div class="space-y-3 text-slate-400">
+            <p><strong>电话：</strong>0086-13997366845</p>
+            <p><strong>邮箱：</strong>wangleihd@gmail.com</p>
+            <p><strong>地址：</strong>中国(云南)自由贸易试验区昆明片区经开区顺通大道31号国际珠宝城6栋4层F407-22</p>
+          </div>
+        </div>
+        
+        <form class="space-y-4 p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
+          <div>
+            <label class="block mb-2 text-slate-300">公司/姓名</label>
+            <input type="text" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请输入您的姓名或公司名称" required />
+          </div>
+          <div>
+            <label class="block mb-2 text-slate-300">联系电话</label>
+            <input type="tel" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请输入您的联系电话" required />
+          </div>
+          <div>
+            <label class="block mb-2 text-slate-300">电子邮箱</label>
+            <input type="email" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请输入您的电子邮箱" />
+          </div>
+          <div>
+            <label class="block mb-2 text-slate-300">需求描述</label>
+            <textarea rows="4" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请描述您的需求：AI智能体/小程序/跨境电商/其他开发"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition font-medium">
+            提交需求
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</Layout>
