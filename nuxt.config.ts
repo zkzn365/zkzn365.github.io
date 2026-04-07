@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
   app: {
+    baseURL: '/',
     head: {
       title: '中科智农（云南）科技有限责任公司 - AI智能体·小程序·跨境电商定制开发',
       meta: [
