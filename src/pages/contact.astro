@@ -1,44 +1,261 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
 ---
 
 <Layout title="联系我们 - 中科智农">
-  <section class="py-20 bg-slate-900">
+  <!-- Hero -->
+  <section class="py-20 bg-gradient-to-b from-cream/50 to-background relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(48, 53, 49, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(48, 53, 49, 1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+        <span class="size-2 rounded-full bg-primary"></span>
+        联系我们
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-deep-green mb-6">
+        开启您的数字化之旅
+      </h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        无论您有任何问题或合作意向，我们的专业团队都将在第一时间为您提供服务
+      </p>
+    </div>
+  </section>
+
+  <!-- 联系内容 -->
+  <section class="py-20 bg-background">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center text-white">联系我们</h1>
-      
-      <div class="max-w-xl mx-auto">
-        <div class="mb-8 p-6 bg-slate-800/50 border border-slate-700 rounded-2xl">
-          <h2 class="text-xl font-bold mb-4 text-white">联系方式</h2>
-          <div class="space-y-3 text-slate-400">
-            <p><strong>电话：</strong>0086-13997366845</p>
-            <p><strong>邮箱：</strong>wangleihd@gmail.com</p>
-            <p><strong>地址：</strong>中国(云南)自由贸易试验区昆明片区经开区顺通大道31号国际珠宝城6栋4层F407-22</p>
+      <div class="grid lg:grid-cols-5 gap-12">
+        <!-- 左侧：联系方式 -->
+        <div class="lg:col-span-2 space-y-6">
+          <div>
+            <h2 class="text-2xl font-bold text-deep-green mb-2">联系方式</h2>
+            <p class="text-muted-foreground">多种方式联系我们，选择最适合您的</p>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
+              <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-xl shrink-0">
+                📍
+              </div>
+              <div>
+                <div class="font-semibold text-deep-green mb-1">公司地址</div>
+                <div class="text-sm text-muted-foreground leading-relaxed">
+                  中国(云南)自由贸易试验区昆明片区<br />
+                  经开区顺通大道31号国际珠宝城<br />
+                  6栋4层F407-22
+                </div>
+              </div>
+            </div>
+            
+            <a href="tel:0086-13997366845" class="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors group">
+              <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-xl shrink-0 group-hover:bg-primary/20 transition-colors">
+                📞
+              </div>
+              <div>
+                <div class="font-semibold text-deep-green mb-1">联系电话</div>
+                <div class="text-sm text-muted-foreground">0086-13997366845</div>
+              </div>
+            </a>
+            
+            <a href="mailto:wangleihd@gmail.com" class="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors group">
+              <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-xl shrink-0 group-hover:bg-primary/20 transition-colors">
+                📧
+              </div>
+              <div>
+                <div class="font-semibold text-deep-green mb-1">电子邮箱</div>
+                <div class="text-sm text-muted-foreground">wangleihd@gmail.com</div>
+              </div>
+            </a>
+            
+            <div class="flex items-start gap-4 p-5 bg-card border border-border rounded-2xl hover:border-primary/30 transition-colors">
+              <div class="size-12 rounded-xl bg-primary/10 flex items-center justify-center text-xl shrink-0">
+                ⏰
+              </div>
+              <div>
+                <div class="font-semibold text-deep-green mb-1">工作时间</div>
+                <div class="text-sm text-muted-foreground">
+                  周一至周五：9:00 - 18:00<br />
+                  周末：预约咨询
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         
-        <form class="space-y-4 p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-          <div>
-            <label class="block mb-2 text-slate-300">公司/姓名</label>
-            <input type="text" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请输入您的姓名或公司名称" required />
+        <!-- 右侧：表单 -->
+        <div class="lg:col-span-3">
+          <div class="bg-card border border-border rounded-3xl p-8 md:p-10">
+            <h2 class="text-2xl font-bold text-deep-green mb-2">提交需求</h2>
+            <p class="text-muted-foreground mb-8">填写以下表单，我们将在 24 小时内与您联系</p>
+            
+            <form id="contact-form" class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-medium text-deep-green mb-2">公司/姓名 <span class="text-primary">*</span></label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    class="w-full bg-background border border-border text-foreground px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    placeholder="请输入您的姓名或公司名称"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-deep-green mb-2">联系电话 <span class="text-primary">*</span></label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    class="w-full bg-background border border-border text-foreground px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                    placeholder="请输入您的联系电话"
+                  />
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-deep-green mb-2">电子邮箱</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="w-full bg-background border border-border text-foreground px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                  placeholder="请输入您的电子邮箱"
+                />
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-deep-green mb-2">服务类型</label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {[
+                    { value: 'ai', label: 'AI 技术服务', icon: '🧠' },
+                    { value: 'app', label: '应用开发', icon: '💻' },
+                    { value: 'cross', label: '跨境电商', icon: '🌍' },
+                    { value: 'security', label: '网络安全', icon: '🔒' },
+                  ].map((opt) => (
+                    <label class="relative cursor-pointer">
+                      <input type="radio" name="service" value={opt.value} class="peer sr-only" />
+                      <div class="p-4 bg-background border border-border rounded-xl text-center hover:border-primary/30 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+                        <div class="text-2xl mb-1">{opt.icon}</div>
+                        <div class="text-sm font-medium text-deep-green">{opt.label}</div>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-deep-green mb-2">需求描述 <span class="text-primary">*</span></label>
+                <textarea
+                  name="message"
+                  rows="5"
+                  required
+                  class="w-full bg-background border border-border text-foreground px-4 py-3 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all resize-none"
+                  placeholder="请描述您的具体需求，我们将为您提供专业的解决方案建议..."
+                ></textarea>
+              </div>
+              
+              <button
+                type="submit"
+                id="submit-btn"
+                class="w-full inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 text-base"
+              >
+                提交需求
+              </button>
+            </form>
+            
+            <div id="success-message" class="hidden text-center py-12">
+              <div class="size-20 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center text-4xl">
+                ✓
+              </div>
+              <h3 class="text-2xl font-bold text-deep-green mb-2">提交成功！</h3>
+              <p class="text-muted-foreground mb-6">感谢您的信任，我们将在 24 小时内与您联系</p>
+              <button
+                id="reset-btn"
+                class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border hover:bg-muted h-10 px-6 text-deep-green"
+              >
+                继续提交
+              </button>
+            </div>
           </div>
-          <div>
-            <label class="block mb-2 text-slate-300">联系电话</label>
-            <input type="tel" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请输入您的联系电话" required />
-          </div>
-          <div>
-            <label class="block mb-2 text-slate-300">电子邮箱</label>
-            <input type="email" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请输入您的电子邮箱" />
-          </div>
-          <div>
-            <label class="block mb-2 text-slate-300">需求描述</label>
-            <textarea rows="4" class="w-full bg-slate-700 border border-slate-600 text-white p-3 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="请描述您的需求：AI智能体/小程序/跨境电商/其他开发"></textarea>
-          </div>
-          <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition font-medium">
-            提交需求
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- FAQ -->
+  <section class="py-20 bg-cream/30">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionTitle
+        eyebrow="常见问题"
+        title="您可能想了解的问题"
+        description="这里是客户最常问到的问题，如果没有找到答案，欢迎随时联系我们"
+        center={true}
+      />
+      
+      <div class="space-y-4">
+        {[
+          {
+            q: '项目一般需要多长时间完成？',
+            a: '项目周期取决于需求复杂度。小程序开发通常 2-4 周，企业官网 2-6 周，AI 智能体项目 1-3 个月，大型系统 3-6 个月。我们会在需求确认后给出准确的时间预估。',
+          },
+          {
+            q: '报价是如何确定的？',
+            a: '我们根据项目需求的复杂度、功能模块、开发周期等因素进行综合评估报价。在充分了解您的需求后，我们会提供详细的报价单和项目计划。',
+          },
+          {
+            q: '是否提供售后支持？',
+            a: '是的，所有项目均包含免费质保期（一般为 3-12 个月）。质保期后我们也提供持续的技术支持和运维服务，确保系统稳定运行。',
+          },
+          {
+            q: '可以先做原型再决定吗？',
+            a: '可以。对于较大型的项目，我们可以先提供产品原型设计和技术方案，双方确认后再进入开发阶段，降低项目风险。',
+          },
+          {
+            q: '支持哪些付款方式？',
+            a: '我们支持银行转账、微信支付、支付宝等多种付款方式。一般采用分期付款方式：首付 30%-50%，中期验收后支付 30%-40%，上线验收后支付尾款。',
+          },
+        ].map((item, i) => (
+          <details key={i} class="group bg-card border border-border rounded-2xl overflow-hidden">
+            <summary class="flex items-center justify-between p-6 cursor-pointer list-none hover:bg-muted/50 transition-colors">
+              <span class="font-semibold text-deep-green">{item.q}</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-5 text-muted-foreground group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="px-6 pb-6 text-muted-foreground leading-relaxed">
+              {item.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const successMsg = document.getElementById('success-message');
+    const submitBtn = document.getElementById('submit-btn');
+    const resetBtn = document.getElementById('reset-btn');
+    
+    if (form && successMsg && submitBtn && resetBtn) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        submitBtn.textContent = '提交中...';
+        submitBtn.disabled = true;
+        
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+        
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+      });
+      
+      resetBtn.addEventListener('click', () => {
+        form.reset();
+        form.classList.remove('hidden');
+        successMsg.classList.add('hidden');
+        submitBtn.textContent = '提交需求';
+        submitBtn.disabled = false;
+      });
+    }
+  </script>
 </Layout>

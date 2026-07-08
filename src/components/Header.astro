@@ -1,0 +1,75 @@
+---
+const navItems = [
+  { href: '/', label: '首页' },
+  { href: '/services', label: '服务项目' },
+  { href: '/cases', label: '成功案例' },
+  { href: '/about', label: '关于我们' },
+  { href: '/contact', label: '联系我们' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <a href="/" class="flex items-center gap-2 text-xl font-bold text-deep-green">
+      <span class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold">智</span>
+      中科智农
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`text-sm font-medium transition-colors ${isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'}`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+    </div>
+    <a
+      href="/contact"
+      class="hidden md:inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6"
+    >
+      立即咨询
+    </a>
+    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-muted transition">
+      <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="md:hidden hidden bg-background border-t border-border">
+    <div class="px-4 py-4 flex flex-col gap-2">
+      {navItems.map((item) => {
+        const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+        return (
+          <a
+            href={item.href}
+            class={`px-4 py-3 rounded-lg text-sm font-medium transition-colors ${isActive ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:bg-muted hover:text-foreground'}`}
+          >
+            {item.label}
+          </a>
+        );
+      })}
+      <a
+        href="/contact"
+        class="mt-2 inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-6"
+      >
+        立即咨询
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>

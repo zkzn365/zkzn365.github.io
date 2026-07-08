@@ -1,38 +1,240 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import CaseCard from '../components/CaseCard.astro';
+
+const categories = ['全部', 'AI 智能体', '小程序开发', '跨境电商', '应用开发', '网络安全'];
+
+const cases = [
+  {
+    title: '某制造集团 AI 智能客服系统',
+    category: 'AI 智能体',
+    description: '为大型制造企业打造具备多轮对话、知识库问答、工单自动创建能力的智能客服系统，客服效率提升 70%，客户满意度提升至 95%。',
+    tags: ['大模型微调', '知识库', '多轮对话', '工单系统'],
+    gradient: 'from-primary/30 to-chart-2/20',
+    client: '某大型制造集团',
+    period: '3 个月',
+  },
+  {
+    title: '跨境电商独立站平台',
+    category: '跨境电商',
+    description: '为外贸企业搭建多语言多币种独立站，集成 Stripe、PayPal 等国际支付与 DHL、FedEx 物流系统，助力快速布局全球市场。',
+    tags: ['多语言', '国际支付', '物流对接', 'SEO 优化'],
+    gradient: 'from-chart-3/30 to-chart-4/20',
+    client: '某外贸品牌',
+    period: '2 个月',
+  },
+  {
+    title: '某品牌全平台小程序商城',
+    category: '小程序开发',
+    description: '微信/支付宝/抖音三端合一的品牌小程序商城，支持分销、拼团、积分、优惠券等多种营销玩法，上线 3 个月 GMV 突破 500 万。',
+    tags: ['多端合一', '分销系统', '营销玩法', '数据看板'],
+    gradient: 'from-chart-2/30 to-chart-5/20',
+    client: '某知名消费品牌',
+    period: '2.5 个月',
+  },
+  {
+    title: '企业级 Agent 管理平台',
+    category: 'AI 智能体',
+    description: '为金融机构搭建可扩展的 Agent 管理平台，支持多智能体协同工作，实现信贷审批、风控预警、客户分析等业务流程的智能化重构。',
+    tags: ['Agent 平台', '多智能体', '流程自动化', '金融风控'],
+    gradient: 'from-primary/25 to-chart-3/20',
+    client: '某金融机构',
+    period: '6 个月',
+  },
+  {
+    title: '农业 IoT 数据管理系统',
+    category: '应用开发',
+    description: '为农业企业开发物联网数据采集与管理系统，实现土壤温湿度、光照、空气质量等环境监测，结合 AI 提供种植决策建议。',
+    tags: ['IoT', '数据可视化', '智能决策', '移动端'],
+    gradient: 'from-chart-4/30 to-primary/20',
+    client: '某农业科技公司',
+    period: '4 个月',
+  },
+  {
+    title: '等保合规安全评估项目',
+    category: '网络安全',
+    description: '为多家政务与企业客户提供等保三级合规咨询与技术支撑，包括安全评估、漏洞扫描、渗透测试、安全加固，全部顺利通过测评。',
+    tags: ['等保三级', '安全评估', '渗透测试', '合规咨询'],
+    gradient: 'from-chart-5/30 to-chart-2/20',
+    client: '多家政企客户',
+    period: '持续服务',
+  },
+  {
+    title: '某连锁餐饮企业管理系统',
+    category: '应用开发',
+    description: '为连锁餐饮企业打造一体化管理系统，涵盖门店管理、会员系统、库存管理、数据分析等模块，管理效率提升 60%。',
+    tags: ['连锁管理', '会员系统', '库存管理', '数据分析'],
+    gradient: 'from-chart-2/25 to-chart-4/20',
+    client: '某连锁餐饮品牌',
+    period: '5 个月',
+  },
+  {
+    title: '政务 AI 问答助手',
+    category: 'AI 智能体',
+    description: '为政务部门打造 AI 问答助手，整合政策法规、办事指南等知识库，实现 7×24 小时智能咨询，日均服务群众 5000+ 人次。',
+    tags: ['政务 AI', '知识库', '多轮对话', '数据统计'],
+    gradient: 'from-primary/20 to-chart-5/20',
+    client: '某政务部门',
+    period: '2 个月',
+  },
+  {
+    title: '东南亚跨境分销系统',
+    category: '跨境电商',
+    description: '面向东南亚市场的跨境分销管理系统，支持多语言多币种、多级分销、订单管理、物流追踪等功能，服务分销商 1000+。',
+    tags: ['分销系统', '多语言', '订单管理', '东南亚市场'],
+    gradient: 'from-chart-3/25 to-primary/15',
+    client: '某跨境电商企业',
+    period: '4 个月',
+  },
+];
 ---
 
 <Layout title="成功案例 - 中科智农">
-  <section class="py-20 bg-slate-900">
+  <!-- Hero -->
+  <section class="py-20 bg-gradient-to-b from-cream/50 to-background relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(48, 53, 49, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(48, 53, 49, 1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+        <span class="size-2 rounded-full bg-primary"></span>
+        成功案例
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-deep-green mb-6">
+        200+ 企业客户的共同选择
+      </h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        从 AI 智能体到跨境电商，从小程序到企业管理系统，
+        我们用技术实力为客户创造真实的商业价值
+      </p>
+    </div>
+  </section>
+
+  <!-- 案例列表 -->
+  <section class="py-20 bg-background">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center text-white">成功案例</h1>
-      <p class="text-center text-slate-400 mb-12">已服务200+企业客户，覆盖多个行业领域</p>
+      <!-- 筛选标签 -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        {categories.map((cat, i) => (
+          <button
+            class={`case-filter px-5 py-2 rounded-full text-sm font-medium transition-all ${i === 0 ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary'}`}
+            data-category={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden hover:border-primary/50 transition">
-          <div class="h-48 bg-gradient-to-br from-primary/20 to-primary/5"></div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 text-white">某集团AI客服系统</h3>
-            <p class="text-slate-400 text-sm">AI智能体 · 企业服务</p>
+      <!-- 案例卡片 -->
+      <div id="cases-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {cases.map((c, i) => (
+          <div class="case-item" data-category={c.category}>
+            <div class="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
+              <div class={`h-48 bg-gradient-to-br ${c.gradient} relative overflow-hidden shrink-0`}>
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwIDkuOTQtOC4wNiAxOC0xOCAxOFYwYzkuOTQgMCAxOCA4LjA2IDE4IDE4eiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50"></div>
+                <div class="absolute top-4 left-4">
+                  <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/90 text-xs font-medium text-deep-green backdrop-blur-sm">
+                    {c.category}
+                  </span>
+                </div>
+                <div class="absolute bottom-4 right-4 flex gap-2">
+                  <div class="px-2.5 py-1 rounded-md bg-white/80 backdrop-blur-sm text-xs text-deep-green">
+                    {c.client}
+                  </div>
+                </div>
+              </div>
+              <div class="p-6 flex-1 flex flex-col">
+                <h3 class="text-lg font-bold text-deep-green mb-3 group-hover:text-primary transition-colors">
+                  {c.title}
+                </h3>
+                <p class="text-muted-foreground text-sm mb-4 line-clamp-3 flex-1">{c.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {c.tags.slice(0, 3).map((tag) => (
+                    <span class="px-2.5 py-1 bg-muted rounded-md text-xs text-muted-foreground">{tag}</span>
+                  ))}
+                </div>
+                <div class="flex items-center justify-between text-xs text-muted-foreground pt-4 border-t border-border">
+                  <span>周期：{c.period}</span>
+                  <span class="text-primary font-medium">查看详情 →</span>
+                </div>
+              </div>
+            </div>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据统计 -->
+  <section class="py-20 bg-deep-green text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-primary mb-2">200+</div>
+          <div class="text-white/70">服务企业客户</div>
         </div>
-        
-        <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden hover:border-primary/50 transition">
-          <div class="h-48 bg-gradient-to-br from-green-500/20 to-green-500/5"></div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 text-white">跨境电商独立站</h3>
-            <p class="text-slate-400 text-sm">跨境电商 · 外贸平台</p>
-          </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-primary mb-2">500+</div>
+          <div class="text-white/70">交付项目</div>
         </div>
-        
-        <div class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden hover:border-primary/50 transition">
-          <div class="h-48 bg-gradient-to-br from-purple-500/20 to-purple-500/5"></div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-2 text-white">某品牌小程序商城</h3>
-            <p class="text-slate-400 text-sm">小程序开发 · 电商商城</p>
-          </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-primary mb-2">99%</div>
+          <div class="text-white/70">客户满意度</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-primary mb-2">8+</div>
+          <div class="text-white/70">覆盖行业</div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-deep-green mb-4">也想成为我们的成功案例？</h2>
+      <p class="text-muted-foreground text-lg mb-8">联系我们，让您的项目也成为下一个成功故事</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 text-base"
+        >
+          免费咨询
+        </a>
+        <a
+          href="/services"
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border hover:bg-muted h-12 px-8 text-base text-deep-green"
+        >
+          了解服务
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const filters = document.querySelectorAll('.case-filter');
+    const items = document.querySelectorAll('.case-item');
+    
+    filters.forEach((filter) => {
+      filter.addEventListener('click', () => {
+        const category = filter.dataset.category;
+        
+        filters.forEach((f) => {
+          f.classList.remove('bg-primary', 'text-primary-foreground');
+          f.classList.add('bg-muted', 'text-muted-foreground', 'hover:bg-primary/10', 'hover:text-primary');
+        });
+        filter.classList.remove('bg-muted', 'text-muted-foreground', 'hover:bg-primary/10', 'hover:text-primary');
+        filter.classList.add('bg-primary', 'text-primary-foreground');
+        
+        items.forEach((item) => {
+          const itemCategory = item.dataset.category;
+          if (category === '全部' || itemCategory === category) {
+            (item as HTMLElement).style.display = 'block';
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </Layout>

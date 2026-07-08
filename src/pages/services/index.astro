@@ -1,64 +1,221 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+
+const aiServices = [
+  {
+    icon: '🧠',
+    title: '大模型训练与微调',
+    description: '基于主流开源大模型，根据企业业务数据进行专业微调，打造专属行业模型。',
+  },
+  {
+    icon: '📚',
+    title: '企业专属知识库',
+    description: '构建企业私有知识库，实现文档智能问答、知识检索、内容生成等功能。',
+  },
+  {
+    icon: '🤖',
+    title: 'AI Agent 智能体',
+    description: '定制开发具备自主决策、多轮执行、工具调用能力的企业级智能体。',
+  },
+  {
+    icon: '🏢',
+    title: 'Agent 管理平台',
+    description: '可扩展的智能体管理平台，支持多智能体协同工作与统一调度管理。',
+  },
+];
+
+const appServices = [
+  {
+    icon: '🌐',
+    title: '企业官网建设',
+    description: '定制化企业官网开发，包含域名备案一站式服务，打造专业品牌形象。',
+  },
+  {
+    icon: '📱',
+    title: '全平台小程序',
+    description: '微信/支付宝/抖音小程序开发，覆盖商城、预约、表单等多种场景。',
+  },
+  {
+    icon: '📲',
+    title: 'App 定制开发',
+    description: 'iOS 与 Android 原生及跨平台 App 开发，满足移动端业务需求。',
+  },
+  {
+    icon: '📊',
+    title: '企业管理软件',
+    description: 'CRM、ERP、OA 等企业管理系统定制开发，提升内部运营效率。',
+  },
+];
+
+const crossBorderServices = [
+  {
+    icon: '🏪',
+    title: '独立站建设',
+    description: '专业外贸独立站设计与开发，打造品牌出海第一站。',
+  },
+  {
+    icon: '🌏',
+    title: '多语言商城系统',
+    description: '支持多语言、多币种的跨境电商商城系统，适配全球市场。',
+  },
+  {
+    icon: '💳',
+    title: '支付物流集成',
+    description: '对接国际主流支付网关与物流服务商，实现完整交易闭环。',
+  },
+  {
+    icon: '📦',
+    title: '进出口技术支撑',
+    description: '依托云南区位优势，提供跨境业务全流程技术支撑与系统对接。',
+  },
+];
+
+const securityServices = [
+  {
+    icon: '🛡️',
+    title: '安全软件开发',
+    description: '网络与信息安全软件定制开发，构建企业安全防护体系。',
+  },
+  {
+    icon: '🔍',
+    title: '系统安全评估',
+    description: '全面的系统漏洞检测与安全评估，识别潜在安全风险。',
+  },
+  {
+    icon: '🔐',
+    title: '数据安全防护',
+    description: '数据加密、备份、脱敏等全方位数据安全防护方案。',
+  },
+  {
+    icon: '📋',
+    title: '等保合规咨询',
+    description: '等级保护测评咨询与技术支撑，助力企业顺利通过等保认证。',
+  },
+];
+
+const serviceCategories = [
+  { id: 'ai', title: 'AI 技术服务', subtitle: '大模型 · 知识库 · Agent 智能体', icon: '🧠', services: aiServices, bg: 'bg-primary/5' },
+  { id: 'app', title: '应用开发服务', subtitle: '官网 · 小程序 · App · 管理软件', icon: '💻', services: appServices, bg: 'bg-chart-2/5' },
+  { id: 'cross-border', title: '跨境电商方案', subtitle: '独立站 · 多语言 · 支付物流', icon: '🌍', services: crossBorderServices, bg: 'bg-chart-3/5' },
+  { id: 'security', title: '网络安全服务', subtitle: '安全评估 · 数据防护 · 合规咨询', icon: '🔒', services: securityServices, bg: 'bg-chart-4/5' },
+];
 ---
 
 <Layout title="服务项目 - 中科智农">
-  <section class="py-20 bg-slate-900">
+  <!-- Hero -->
+  <section class="py-20 bg-gradient-to-b from-cream/50 to-background relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(rgba(48, 53, 49, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(48, 53, 49, 1) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+        <span class="size-2 rounded-full bg-primary"></span>
+        全品类技术服务
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-deep-green mb-6">
+        一站式企业数字化解决方案
+      </h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        从 AI 技术研发到应用开发落地，从跨境电商到网络安全，
+        中科智农为您提供全链路数字化转型服务。
+      </p>
+    </div>
+  </section>
+
+  <!-- 快速导航 -->
+  <section class="py-8 bg-background border-b border-border sticky top-16 z-40">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl md:text-4xl font-bold mb-8 text-center text-white">服务项目</h1>
+      <div class="flex flex-wrap justify-center gap-3">
+        {serviceCategories.map((cat) => (
+          <a
+            href={`#${cat.id}`}
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border hover:border-primary/50 hover:bg-primary/5 text-sm text-muted-foreground hover:text-primary transition-all"
+          >
+            <span>{cat.icon}</span>
+            {cat.title}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 各服务板块 -->
+  {serviceCategories.map((cat, idx) => (
+    <section id={cat.id} class={`py-24 ${idx % 2 === 1 ? cat.bg : 'bg-background'}`}>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-start gap-6 mb-12">
+          <div class="size-16 rounded-2xl bg-primary/10 flex items-center justify-center text-3xl shrink-0">
+            {cat.icon}
+          </div>
+          <div>
+            <h2 class="text-3xl font-bold text-deep-green mb-2">{cat.title}</h2>
+            <p class="text-muted-foreground text-lg">{cat.subtitle}</p>
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {cat.services.map((service) => (
+            <ServiceCard {...service} />
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- 服务流程 -->
+  <section class="py-24 bg-deep-green text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">标准化服务流程</h2>
+        <p class="text-white/70 text-lg">从需求调研到上线运维，全程可控，确保交付质量</p>
+      </div>
       
-      <div class="max-w-4xl mx-auto space-y-8">
-        <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-          <div class="flex items-center gap-4 mb-4">
-            <span class="text-4xl">🤖</span>
-            <h2 class="text-2xl font-bold text-white">AI智能体开发</h2>
+      <div class="grid md:grid-cols-5 gap-6">
+        {[
+          { step: '01', title: '需求调研', desc: '深入了解业务需求' },
+          { step: '02', title: '方案设计', desc: '定制最优技术方案' },
+          { step: '03', title: '开发测试', desc: '敏捷开发迭代验证' },
+          { step: '04', title: '上线部署', desc: '全面测试确保稳定' },
+          { step: '05', title: '运维支持', desc: '持续保障系统运行' },
+        ].map((item, i) => (
+          <div key={i} class="relative">
+            <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 h-full">
+              <div class="text-4xl font-bold text-primary/60 mb-3">{item.step}</div>
+              <h3 class="text-lg font-semibold text-white mb-2">{item.title}</h3>
+              <p class="text-white/60 text-sm">{item.desc}</p>
+            </div>
+            {i < 4 && (
+              <div class="hidden md:block absolute top-1/2 -right-3 -translate-y-1/2 text-primary/40">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            )}
           </div>
-          <ul class="list-disc pl-5 space-y-2 text-slate-400">
-            <li>企业智能问答机器人</li>
-            <li>自动化办公AI助手</li>
-            <li>大模型微调与私有化部署</li>
-            <li>AI数据分析与决策系统</li>
-          </ul>
-        </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-        <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-          <div class="flex items-center gap-4 mb-4">
-            <span class="text-4xl">📱</span>
-            <h2 class="text-2xl font-bold text-white">小程序开发</h2>
-          </div>
-          <ul class="list-disc pl-5 space-y-2 text-slate-400">
-            <li>微信小程序定制开发</li>
-            <li>商城/团购/预约/表单系统</li>
-            <li>多端合一小程序开发</li>
-            <li>小程序维护与升级服务</li>
-          </ul>
-        </div>
-
-        <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-          <div class="flex items-center gap-4 mb-4">
-            <span class="text-4xl">🌍</span>
-            <h2 class="text-2xl font-bold text-white">跨境电商平台</h2>
-          </div>
-          <ul class="list-disc pl-5 space-y-2 text-slate-400">
-            <li>多语言外贸独立站</li>
-            <li>国际支付/物流集成</li>
-            <li>库存管理与订单系统</li>
-            <li>SEO优化与海外推广</li>
-          </ul>
-        </div>
-
-        <div class="p-8 bg-slate-800/50 border border-slate-700 rounded-2xl">
-          <div class="flex items-center gap-4 mb-4">
-            <span class="text-4xl">💻</span>
-            <h2 class="text-2xl font-bold text-white">全栈定制开发</h2>
-          </div>
-          <ul class="list-disc pl-5 space-y-2 text-slate-400">
-            <li>企业管理系统开发</li>
-            <li>CRM/ERP系统定制</li>
-            <li>API接口开发与集成</li>
-            <li>技术咨询与架构设计</li>
-          </ul>
-        </div>
+  <!-- CTA -->
+  <section class="py-20 bg-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-deep-green mb-4">不确定需要哪种服务？</h2>
+      <p class="text-muted-foreground text-lg mb-8">联系我们的专家团队，获取免费咨询和定制方案</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-8 text-base"
+        >
+          免费咨询
+        </a>
+        <a
+          href="tel:0086-13997366845"
+          class="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors border border-border hover:bg-muted h-12 px-8 text-base text-deep-green"
+        >
+          电话沟通
+        </a>
       </div>
     </div>
   </section>
