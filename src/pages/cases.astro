@@ -96,6 +96,46 @@ const cases = [
     period: '4 个月',
     imageUrl: '/cross-border.jpg',
   },
+  {
+    title: '企业官网品牌升级项目',
+    category: '应用开发',
+    description: '为科技企业打造品牌官网，响应式设计适配多端，集成内容管理系统，支持 SEO 优化，上线后自然流量增长 200%。',
+    tags: ['品牌官网', '响应式', 'CMS', 'SEO 优化'],
+    gradient: 'from-chart-2/30 to-chart-5/20',
+    client: '某科技企业',
+    period: '1.5 个月',
+    imageUrl: '/app-development.jpg',
+  },
+  {
+    title: 'AI 内容创作平台',
+    category: 'AI 智能体',
+    description: '为内容团队打造 AI 辅助创作平台，支持文案生成、图片生成、视频脚本等多种创作场景，创作效率提升 3 倍。',
+    tags: ['AIGC', '内容创作', '多模态', '团队协作'],
+    gradient: 'from-primary/25 to-chart-4/20',
+    client: '某传媒公司',
+    period: '3 个月',
+    imageUrl: '/ai-technology.jpg',
+  },
+  {
+    title: '微信外卖点餐小程序',
+    category: '小程序开发',
+    description: '为连锁餐饮品牌打造微信外卖点餐小程序，支持堂食扫码点餐、外卖配送、会员储值、优惠券核销等功能。',
+    tags: ['外卖点餐', '会员系统', '支付对接', '门店管理'],
+    gradient: 'from-chart-5/25 to-chart-3/20',
+    client: '某连锁餐饮品牌',
+    period: '2 个月',
+    imageUrl: '/restaurant-pos.jpg',
+  },
+  {
+    title: '数据安全加固服务',
+    category: '网络安全',
+    description: '为医疗机构提供数据安全加固服务，包括数据加密、访问控制、审计日志、防泄露系统，顺利通过三级等保测评。',
+    tags: ['数据安全', '加密技术', '访问控制', '等保三级'],
+    gradient: 'from-chart-4/25 to-chart-5/20',
+    client: '某三甲医院',
+    period: '2 个月',
+    imageUrl: '/security-shield.jpg',
+  },
 ];
 ---
 
@@ -171,8 +211,7 @@ const cases = [
                     <span class="px-2.5 py-1 bg-muted rounded-md text-xs text-muted-foreground">{tag}</span>
                   ))}
                 </div>
-                <div class="flex items-center justify-between text-xs text-muted-foreground pt-4 border-t border-border">
-                  <span>周期：{c.period}</span>
+                <div class="flex items-center justify-end text-xs text-muted-foreground pt-4 border-t border-border">
                   <span class="text-primary font-medium">查看详情 →</span>
                 </div>
               </div>
