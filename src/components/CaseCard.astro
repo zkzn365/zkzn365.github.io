@@ -5,14 +5,25 @@ interface Props {
   description?: string;
   tags?: string[];
   gradient?: string;
+  imageUrl?: string;
 }
 
-const { title, category, description, tags = [], gradient = 'from-primary/20 to-primary/5' } = Astro.props;
+const { title, category, description, tags = [], gradient = 'from-primary/20 to-primary/5', imageUrl } = Astro.props;
 ---
 
 <div class="group bg-card rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-  <div class={`h-48 bg-gradient-to-br ${gradient} relative overflow-hidden`}>
-    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwIDkuOTQtOC4wNiAxOC0xOCAxOFYwYzkuOTQgMCAxOCA4LjA2IDE4IDE4eiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50"></div>
+  <div class={`h-48 relative overflow-hidden ${imageUrl ? '' : `bg-gradient-to-br ${gradient}`}`}>
+    {imageUrl ? (
+      <img
+        src={imageUrl}
+        alt={title}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+    ) : (
+      <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwIDkuOTQtOC4wNiAxOC0xOCAxOFYwYzkuOTQgMCAxOCA4LjA2IDE4IDE4eiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-50"></div>
+    )}
+    <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
     <div class="absolute top-4 left-4">
       <span class="inline-flex items-center px-3 py-1 rounded-full bg-white/90 text-xs font-medium text-deep-green backdrop-blur-sm">
         {category}

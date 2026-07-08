@@ -50,6 +50,7 @@ const cases = [
     description: '为大型制造企业打造具备多轮对话、知识库问答、工单自动创建能力的智能客服系统，客服效率提升 70%。',
     tags: ['大模型微调', '知识库', '多轮对话'],
     gradient: 'from-primary/30 to-chart-2/20',
+    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=futuristic%20AI%20chatbot%20interface%20with%20green%20accent%20color%2C%20digital%20customer%20service%20dashboard%2C%20tech%20style%2C%20professional%20enterprise%20software&image_size=landscape_16_9',
   },
   {
     title: '跨境电商独立站平台',
@@ -57,6 +58,7 @@ const cases = [
     description: '为外贸企业搭建多语言多币种独立站，集成国际支付与物流系统，助力快速布局全球市场。',
     tags: ['多语言', '国际支付', '物流对接'],
     gradient: 'from-chart-3/30 to-chart-4/20',
+    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20ecommerce%20website%20dashboard%20with%20world%20map%2C%20global%20trade%20analytics%2C%20green%20technology%20theme%2C%20professional%20business%20style&image_size=landscape_16_9',
   },
   {
     title: '某品牌全平台小程序商城',
@@ -64,6 +66,7 @@ const cases = [
     description: '微信/支付宝/抖音三端合一的品牌小程序商城，支持分销、拼团、积分等多种营销玩法。',
     tags: ['多端合一', '分销系统', '营销玩法'],
     gradient: 'from-chart-2/30 to-chart-5/20',
+    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20app%20shopping%20mall%20interface%2C%20mini%20program%20design%2C%20green%20accent%20color%2C%20modern%20ecommerce%20UI%2C%20professional%20style&image_size=landscape_16_9',
   },
   {
     title: '企业级 Agent 管理平台',
@@ -71,6 +74,7 @@ const cases = [
     description: '为金融机构搭建可扩展的 Agent 管理平台，支持多智能体协同工作，实现业务流程智能化重构。',
     tags: ['Agent 平台', '多智能体', '流程自动化'],
     gradient: 'from-primary/25 to-chart-3/20',
+    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=enterprise%20AI%20agent%20management%20platform%2C%20multiple%20AI%20bots%20dashboard%2C%20green%20tech%20theme%2C%20futuristic%20interface%2C%20professional&image_size=landscape_16_9',
   },
   {
     title: '农业 IoT 数据管理系统',
@@ -78,6 +82,7 @@ const cases = [
     description: '为农业企业开发物联网数据采集与管理系统，实现种植环境监测、数据分析与智能决策。',
     tags: ['IoT', '数据可视化', '智能决策'],
     gradient: 'from-chart-4/30 to-primary/20',
+    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=agricultural%20IoT%20monitoring%20system%2C%20smart%20farming%20dashboard%2C%20green%20plants%20and%20technology%2C%20data%20visualization%2C%20modern%20UI&image_size=landscape_16_9',
   },
   {
     title: '等保合规安全评估项目',
@@ -85,6 +90,7 @@ const cases = [
     description: '为多家政务与企业客户提供等保三级合规咨询与技术支撑，顺利通过测评。',
     tags: ['等保三级', '安全评估', '合规咨询'],
     gradient: 'from-chart-5/30 to-chart-2/20',
+    imageUrl: 'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cryptographic%20security%20monitoring%20dashboard%2C%20cybersecurity%20protection%20interface%2C%20green%20shield%20icon%2C%20professional%20tech%20style&image_size=landscape_16_9',
   },
 ];
 
@@ -273,23 +279,31 @@ const advantages = [
         <div>
           <div class="relative">
             <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-chart-2/10 rounded-3xl blur-2xl"></div>
-            <div class="relative bg-card border border-border rounded-3xl p-8">
-              <h4 class="font-bold text-deep-green mb-6 text-lg">企业级 Agent 能力矩阵</h4>
-              <div class="grid grid-cols-2 gap-4">
-                {[
-                  { icon: '💬', name: '智能客服', desc: '7×24 小时在线' },
-                  { icon: '📋', name: '流程自动化', desc: '效率提升 80%' },
-                  { icon: '📊', name: '数据分析专家', desc: '实时洞察业务' },
-                  { icon: '🤝', name: '多 Agent 协同', desc: '复杂任务处理' },
-                  { icon: '🔧', name: '工具调用', desc: '对接业务系统' },
-                  { icon: '🧩', name: '可扩展平台', desc: '灵活定制开发' },
-                ].map((item) => (
-                  <div class="p-4 bg-muted/50 rounded-xl hover:bg-primary/5 hover:border-primary/30 border border-transparent transition-all">
-                    <div class="text-2xl mb-2">{item.icon}</div>
-                    <div class="font-semibold text-deep-green text-sm">{item.name}</div>
-                    <div class="text-xs text-muted-foreground">{item.desc}</div>
-                  </div>
-                ))}
+            <div class="relative bg-card border border-border rounded-3xl overflow-hidden">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=advanced%20AI%20model%20neural%20network%20visualization%2C%20deep%20learning%20technology%2C%20green%20glow%2C%20futuristic%20digital%20brain%2C%20professional%20tech%20style&image_size=landscape_16_9"
+                alt="AI 大模型"
+                class="w-full h-48 object-cover"
+                loading="lazy"
+              />
+              <div class="p-8">
+                <h4 class="font-bold text-deep-green mb-6 text-lg">企业级 Agent 能力矩阵</h4>
+                <div class="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: '💬', name: '智能客服', desc: '7×24 小时在线' },
+                    { icon: '📋', name: '流程自动化', desc: '效率提升 80%' },
+                    { icon: '📊', name: '数据分析专家', desc: '实时洞察业务' },
+                    { icon: '🤝', name: '多 Agent 协同', desc: '复杂任务处理' },
+                    { icon: '🔧', name: '工具调用', desc: '对接业务系统' },
+                    { icon: '🧩', name: '可扩展平台', desc: '灵活定制开发' },
+                  ].map((item) => (
+                    <div class="p-4 bg-muted/50 rounded-xl hover:bg-primary/5 hover:border-primary/30 border border-transparent transition-all">
+                      <div class="text-2xl mb-2">{item.icon}</div>
+                      <div class="font-semibold text-deep-green text-sm">{item.name}</div>
+                      <div class="text-xs text-muted-foreground">{item.desc}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -1,0 +1,7 @@
+- [ ] Checkpoint 1: CaseCard 组件修改完成，支持 imageUrl 属性
+- [ ] Checkpoint 2: 9 个案例卡片均配置了真实主题图片
+- [ ] Checkpoint 3: 首页核心技术板块添加了展示图片
+- [ ] Checkpoint 4: 服务项目页四大业务板块添加了主题配图
+- [ ] Checkpoint 5: npm run build 构建成功，无错误
+- [ ] Checkpoint 6: 图片在不同屏幕尺寸下响应式显示正常
+- [ ] Checkpoint 7: 代码成功推送到 GitHub，Actions 部署完成
