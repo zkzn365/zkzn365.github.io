@@ -1,0 +1,5 @@
+- [ ] Checkpoint 1: opc.png 文件存在且为有效 PNG 图片
+- [ ] Checkpoint 2: 联系页面添加微信二维码卡片
+- [ ] Checkpoint 3: 页脚添加微信联系方式
+- [ ] Checkpoint 4: npm run build 构建成功
+- [ ] Checkpoint 5: 代码推送到 GitHub

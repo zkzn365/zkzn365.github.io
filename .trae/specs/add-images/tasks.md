@@ -1,6 +1,6 @@
 # 中科智农官网 - 图片资源补齐实现计划
 
-## [ ] Task 1: 更新 CaseCard 组件支持图片展示
+## [x] Task 1: 更新 CaseCard 组件支持图片展示
 - **Priority**: high
 - **Depends On**: None
 - **Description**: 
@@ -12,7 +12,7 @@
   - `programmatic` TR-1.1: CaseCard 组件接收 imageUrl 属性后能正常渲染图片
   - `human-judgment` TR-1.2: 图片显示在卡片顶部，尺寸适配，加载正常
 
-## [ ] Task 2: 生成并配置案例卡片图片
+## [x] Task 2: 生成并配置案例卡片图片
 - **Priority**: high
 - **Depends On**: Task 1
 - **Description**: 
@@ -24,7 +24,7 @@
   - `human-judgment` TR-2.1: 所有案例卡片显示真实图片，内容与案例主题相关
   - `human-judgment` TR-2.2: 图片风格统一，符合科技感主题
 
-## [ ] Task 3: 更新首页核心技术板块图片
+## [x] Task 3: 更新首页核心技术板块图片
 - **Priority**: medium
 - **Depends On**: None
 - **Description**: 
@@ -35,7 +35,7 @@
   - `human-judgment` TR-3.1: 核心技术板块显示相关主题图片
   - `human-judgment` TR-3.2: 图片与文案内容匹配，视觉效果良好
 
-## [ ] Task 4: 更新服务项目页配图
+## [x] Task 4: 更新服务项目页配图
 - **Priority**: medium
 - **Depends On**: None
 - **Description**: 
@@ -46,7 +46,7 @@
   - `human-judgment` TR-4.1: 四大业务板块均有主题配图
   - `human-judgment` TR-4.2: 图片内容与服务描述一致
 
-## [ ] Task 5: 构建验证与图片优化
+## [x] Task 5: 构建验证与图片优化
 - **Priority**: high
 - **Depends On**: Task 1, Task 2, Task 3, Task 4
 - **Description**: 
@@ -59,7 +59,7 @@
   - `human-judgment` TR-5.2: 图片加载速度正常，懒加载有效
   - `human-judgment` TR-5.3: 不同屏幕尺寸下图片显示正常
 
-## [ ] Task 6: 推送代码到 GitHub
+## [x] Task 6: 推送代码到 GitHub
 - **Priority**: high
 - **Depends On**: Task 5
 - **Description**: 
