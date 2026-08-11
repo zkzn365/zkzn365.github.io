@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <!-- 麦穗渐变 -->
+    <linearGradient id="wheatGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#C4955A;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D4A853;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8C36A;stop-opacity:1" />
+    </linearGradient>
+    <!-- 绿色渐变 -->
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3A7D44;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5BA665;stop-opacity:1" />
+    </linearGradient>
+    <!-- 蓝色渐变 -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2A6B8A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3A8FBA;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- ===== 麦穗（左侧，从底部向右上弯曲）===== -->
+  <!-- 麦穗主茎 -->
+  <path d="M72 110 Q60 80 65 55 Q68 40 80 30" stroke="url(#wheatGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <!-- 麦穗颗粒 - 左侧 -->
+  <ellipse cx="62" cy="95" rx="8" ry="4" transform="rotate(-20 62 95)" fill="#C4955A" opacity="0.9"/>
+  <ellipse cx="58" cy="82" rx="8" ry="4" transform="rotate(-30 58 82)" fill="#D4A853" opacity="0.9"/>
+  <ellipse cx="57" cy="68" rx="8" ry="4" transform="rotate(-40 57 68)" fill="#D4A853" opacity="0.9"/>
+  <ellipse cx="60" cy="55" rx="7" ry="3.5" transform="rotate(-50 60 55)" fill="#E8C36A" opacity="0.9"/>
+  <ellipse cx="67" cy="44" rx="6" ry="3" transform="rotate(-55 67 44)" fill="#E8C36A" opacity="0.85"/>
+  <ellipse cx="76" cy="36" rx="5" ry="2.5" transform="rotate(-60 76 36)" fill="#E8C36A" opacity="0.8"/>
+
+  <!-- 麦穗颗粒 - 右侧 -->
+  <ellipse cx="78" cy="98" rx="8" ry="4" transform="rotate(10 78 98)" fill="#C4955A" opacity="0.85"/>
+  <ellipse cx="75" cy="85" rx="8" ry="4" transform="rotate(5 75 85)" fill="#D4A853" opacity="0.85"/>
+  <ellipse cx="74" cy="72" rx="7" ry="3.5" transform="rotate(0 74 72)" fill="#D4A853" opacity="0.85"/>
+  <ellipse cx="75" cy="60" rx="6" ry="3" transform="rotate(-5 75 60)" fill="#E8C36A" opacity="0.85"/>
+  <ellipse cx="80" cy="50" rx="5" ry="2.5" transform="rotate(-15 80 50)" fill="#E8C36A" opacity="0.8"/>
+  <ellipse cx="87" cy="42" rx="4" ry="2" transform="rotate(-25 87 42)" fill="#E8C36A" opacity="0.75"/>
+
+  <!-- 麦穗顶部小尖 -->
+  <ellipse cx="82" cy="33" rx="3" ry="6" transform="rotate(-30 82 33)" fill="#E8C36A" opacity="0.7"/>
+
+  <!-- ===== 绿色弧线（底部，禾苗/水流意象）===== -->
+  <path d="M70 115 Q90 100 115 105 Q130 108 140 100" stroke="url(#greenGrad)" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <path d="M75 122 Q95 108 118 112 Q132 114 142 108" stroke="#4A9D54" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M80 128 Q98 116 120 118 Q133 119 143 114" stroke="#5BA665" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- ===== 蓝色弧线 + 节点（右侧，电路/科技意象）===== -->
+  <!-- 弧线1 -->
+  <path d="M100 105 Q115 90 125 75 Q132 62 135 50" stroke="url(#blueGrad)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="135" cy="48" r="3.5" fill="#3A8FBA" opacity="0.9"/>
+  <circle cx="135" cy="42" r="2" fill="#3A8FBA" opacity="0.6"/>
+
+  <!-- 弧线2 -->
+  <path d="M108 108 Q122 95 132 82 Q140 70 145 58" stroke="#2A6B8A" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <circle cx="145" cy="56" r="3.5" fill="#2A6B8A" opacity="0.85"/>
+  <circle cx="147" cy="50" r="2" fill="#2A6B8A" opacity="0.55"/>
+
+  <!-- 弧线3 -->
+  <path d="M115 110 Q128 98 138 88 Q146 78 152 68" stroke="#3A8FBA" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="152" cy="66" r="3" fill="#3A8FBA" opacity="0.7"/>
+  <circle cx="154" cy="61" r="1.8" fill="#3A8FBA" opacity="0.45"/>
+
+  <!-- ===== 文字 ===== -->
+  <text x="100" y="160" text-anchor="middle" font-family="'Alibaba PuHuiTi 3', 'Noto Sans SC Variable', system-ui, sans-serif" font-weight="800" font-size="32" fill="#2C2C2C" letter-spacing="4">中科智农</text>
+  <text x="100" y="180" text-anchor="middle" font-family="'Alibaba PuHuiTi 3', 'Noto Sans SC Variable', system-ui, sans-serif" font-weight="500" font-size="13" fill="#666666" letter-spacing="3">ZHONGKE ZHINONG</text>
+</svg>

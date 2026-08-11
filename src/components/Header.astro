@@ -11,11 +11,16 @@ const currentPath = Astro.url.pathname;
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-    <a href="/" class="flex items-center gap-2 text-xl font-bold text-deep-green">
-      <span class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-primary-foreground text-sm font-bold">智</span>
-      中科智农
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+    <!-- Logo 组合 -->
+    <a href="/" class="logo-wrap">
+      <!-- 图标 - 所有尺寸都显示 -->
+      <img src="/logo-emblem.png" alt="中科智农" class="logo-icon" />
+      <!-- 主标题 - 移动端隐藏 -->
+      <span class="logo-main-title">中科智农</span>
     </a>
+
+    <!-- 桌面端导航 -->
     <div class="hidden md:flex items-center gap-8">
       {navItems.map((item) => {
         const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
