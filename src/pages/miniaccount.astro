@@ -1,0 +1,380 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const version = 'v0.2.0';
+const releaseUrl = 'https://github.com/zkzn365/miniaccount/releases/tag/v0.2.0';
+
+// 下载链接（GitHub Release 直链）
+const downloads = [
+  {
+    platform: 'Windows',
+    icon: '🪟',
+    arch: 'x64',
+    ext: 'zip',
+    url: 'https://github.com/zkzn365/miniaccount/releases/download/v0.2.0/MiniAccount_0.2.0_windows_x64.zip',
+    desc: 'Windows 10/11 (64位)',
+    size: '约 15 MB',
+  },
+  {
+    platform: 'macOS',
+    icon: '🍎',
+    arch: 'Universal',
+    ext: 'dmg',
+    url: 'https://github.com/zkzn365/miniaccount/releases/download/v0.2.0/MiniAccount_0.2.0_darwin_universal.dmg',
+    desc: 'macOS 11+ (Intel/Apple Silicon)',
+    size: '约 18 MB',
+  },
+  {
+    platform: 'Linux',
+    icon: '🐧',
+    arch: 'amd64',
+    ext: 'AppImage',
+    url: 'https://github.com/zkzn365/miniaccount/releases/download/v0.2.0/MiniAccount_0.2.0_linux_amd64.AppImage',
+    desc: 'Ubuntu/Debian (64位)',
+    size: '约 16 MB',
+  },
+];
+
+const modules = [
+  {
+    icon: '📁',
+    title: '账套管理',
+    features: ['新建账套（小企业会计准则）', '独立 SQLite 单文件存储', '支持远程 PostgreSQL 数据库', '账套备份与恢复（直接复制 db 文件）'],
+  },
+  {
+    icon: '🗂️',
+    title: '科目管理',
+    features: ['科目树支持多级二级科目', '其他应付款 - 股东、应收/应付账款', '科目类型与余额方向管理', '灵活的科目增删改'],
+  },
+  {
+    icon: '👥',
+    title: '往来档案',
+    features: ['客户档案与供应商档案管理', '启用 / 停用状态控制', '往来辅助核算：凭证分录可绑定客户/供应商', '基础信息维护'],
+  },
+  {
+    icon: '📝',
+    title: '凭证管理',
+    features: ['凭证录入，借贷平衡强制校验', '分录可绑定客户/供应商（辅助核算）', '凭证查询、修改、删除、导出', '批量管理与审核'],
+  },
+  {
+    icon: '🏦',
+    title: '银行流水导入',
+    features: ['CSV 导入银行流水', '批量自动生成凭证', '流水与凭证双向关联', '股东借款功能保留'],
+  },
+  {
+    icon: '📊',
+    title: '账簿查询',
+    features: ['总账、科目明细账', '客户应收明细账、供应商应付明细账', '科目余额表、往来单位余额表', '其他应付款 - 股东导出'],
+  },
+  {
+    icon: '📈',
+    title: '财务报表',
+    features: ['资产负债表、利润表', '导出 Excel / PDF 格式', '自动期末结转', '报表期间灵活选择'],
+  },
+  {
+    icon: '💰',
+    title: '工资模块',
+    features: ['在职员工 / 外聘劳务人员档案', '工资单录入，个税社保计算', '自动生成会计凭证', '工资表导出'],
+  },
+  {
+    icon: '🧾',
+    title: '发票与差旅报销',
+    features: ['发票档案管理（专票 / 普票）', '发票关联凭证', '差旅报销单录入，附件本地保存', '报销单一键生成会计凭证'],
+  },
+];
+
+const notIncluded = [
+  '进销存库存管理',
+  '生产模块',
+  '多用户权限与网络协同',
+  '自动 OCR 识别发票',
+  '增值税申报对接',
+];
+
+const techStack = [
+  { name: 'Go', desc: '后端核心语言，编译型高性能' },
+  { name: 'Wails', desc: 'Go + Web 前端打包桌面程序' },
+  { name: 'SQLite', desc: '纯 Go 驱动，无需 C 依赖' },
+  { name: 'PostgreSQL', desc: '远程数据库可选支持' },
+  { name: 'Vue 3', desc: '前端框架，响应式界面' },
+  { name: 'shadcn-vue', desc: 'UI 组件库，统一设计风格' },
+];
+
+const goLibs = [
+  { name: 'modernc.org/sqlite', desc: '纯 Go SQLite 驱动，跨平台打包友好' },
+  { name: 'encoding/csv', desc: '银行流水 CSV 解析' },
+  { name: 'excelize', desc: '生成 Excel 报表导出' },
+  { name: 'gopdf', desc: 'PDF 报表导出' },
+];
+---
+
+<Layout
+  title="MiniAccount 迷你记账 - 中科智农"
+  description="MiniAccount 是一款免费的小型财务记账软件，专为小规模企业和个体纳税人设计。支持 Windows、Linux、macOS 三平台，涵盖账套管理、凭证录入、银行流水导入、财务报表等核心功能。"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary-foreground/90 text-secondary-foreground">
+    <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMwIDkuOTQtOC4wNiAxOC0xOCAxOFYwYzkuOTQgMCAxOCA4LjA2IDE4IDE4eiIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSIvPjwvZz48L3N2Zz4=')] opacity-30"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium mb-6">
+            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            免费开源 · v0.2.0
+          </span>
+          <h1 class="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+            MiniAccount<br />
+            <span class="text-primary">迷你记账软件</span>
+          </h1>
+          <p class="text-lg text-secondary-foreground/70 mb-8 leading-relaxed">
+            专为小型企业和个体纳税人打造的免费财务记账软件，覆盖凭证管理、银行流水导入、财务报表等核心功能。本地存储，数据安全，三平台支持。
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#download" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              立即下载
+            </a>
+            <a href={releaseUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-secondary-foreground/30 text-secondary-foreground font-medium hover:bg-secondary-foreground/10 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.67.58-3.23-1.29-3.23-1.29-.44-1.11-1.07-1.41-1.07-1.41-.87-.59.07-.58.07-.58.96.07 1.47.99 1.47.99.85 1.46 2.24 1.04 2.79.8.09-.62.33-1.04.6-1.28-2.14-.24-4.39-1.07-4.39-4.76 0-1.05.38-1.91 1-2.58-.1-.25-.43-1.26.1-2.63 0 0 .84-.27 2.75 1.02A9.56 9.56 0 018 4.5c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.53 1.37.2 2.38.1 2.63.62.67 1 1.53 1 2.58 0 3.7-2.25 4.51-4.4 4.75.35.3.66.89.66 1.79 0 1.29-.01 2.33-.01 2.65 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z" />
+              </svg>
+              GitHub 主页
+            </a>
+          </div>
+        </div>
+        <!-- 产品预览 -->
+        <div class="relative">
+          <div class="rounded-2xl bg-background/95 p-2 shadow-2xl">
+            <div class="rounded-xl overflow-hidden bg-muted">
+              <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-card">
+                <div class="flex gap-1.5">
+                  <span class="w-3 h-3 rounded-full bg-red-400"></span>
+                  <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+                  <span class="w-3 h-3 rounded-full bg-green-400"></span>
+                </div>
+                <span class="text-xs text-muted-foreground ml-2">MiniAccount — 记账凭证</span>
+              </div>
+              <div class="p-4 space-y-3 text-sm">
+                <div class="flex justify-between items-center p-2 rounded bg-background">
+                  <span class="text-muted-foreground">日期</span>
+                  <span class="font-medium">2026-03-15</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="p-2 rounded bg-background">
+                    <div class="text-xs text-muted-foreground mb-1">借方</div>
+                    <div class="font-mono font-medium">银行存款</div>
+                    <div class="text-xs text-muted-foreground">6601.01 工商银行</div>
+                  </div>
+                  <div class="p-2 rounded bg-background">
+                    <div class="text-xs text-muted-foreground mb-1">贷方</div>
+                    <div class="font-mono font-medium">应收账款</div>
+                    <div class="text-xs text-muted-foreground">1131 - 客户A</div>
+                  </div>
+                </div>
+                <div class="flex justify-between p-2 rounded bg-primary/10 text-primary font-medium">
+                  <span>合计</span>
+                  <span>¥ 50,000.00</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span class="inline-block w-2 h-2 rounded-full bg-green-500"></span>
+                  借贷平衡 ✓
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-4 -right-4 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-bold shadow-lg rotate-3">
+            全免费
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 下载区 -->
+  <section id="download" class="py-16 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">免费下载</h2>
+        <p class="text-muted-foreground text-lg">v{version} · 三平台支持 · 永久免费 · 无需注册</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {downloads.map((d) => (
+          <div class="group relative rounded-2xl border border-border bg-card p-8 hover:shadow-lg hover:border-primary/50 transition-all duration-300">
+            <div class="text-5xl mb-4">{d.icon}</div>
+            <h3 class="text-xl font-bold mb-1">{d.platform}</h3>
+            <p class="text-sm text-muted-foreground mb-2">{d.desc}</p>
+            <div class="flex items-center gap-3 mb-6 text-xs text-muted-foreground">
+              <span class="px-2 py-1 rounded bg-muted">{d.arch}</span>
+              <span>·</span>
+              <span>{d.size}</span>
+              <span>·</span>
+              <span>.{d.ext}</span>
+            </div>
+            <a
+              href={d.url}
+              class="flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+              </svg>
+              下载 {d.platform} 版
+            </a>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-8">
+        <a href={releaseUrl} target="_blank" rel="noopener" class="text-sm text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1">
+          查看 GitHub 发布页 →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 功能清单 -->
+  <section class="py-16 lg:py-24 bg-muted/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">完整功能清单</h2>
+        <p class="text-muted-foreground text-lg">覆盖小型企业记账全流程，从凭证到报表一站式完成</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {modules.map((m) => (
+          <div class="rounded-xl bg-card border border-border p-6 hover:shadow-md transition-shadow">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-3xl">{m.icon}</span>
+              <h3 class="text-lg font-bold">{m.title}</h3>
+            </div>
+            <ul class="space-y-2">
+              {m.features.map((f) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 不包含的功能 -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-border bg-muted/20 p-8 lg:p-10">
+        <h2 class="text-xl font-bold mb-2">保持最小版本，不包含以下功能</h2>
+        <p class="text-sm text-muted-foreground mb-6">为减少复杂度，让小型企业快速上手，以下功能不在当前版本中开发：</p>
+        <div class="flex flex-wrap gap-3">
+          {notIncluded.map((item) => (
+            <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-muted text-muted-foreground text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技术架构 -->
+  <section class="py-16 lg:py-24 bg-secondary text-secondary-foreground">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4">技术架构</h2>
+        <p class="text-secondary-foreground/70 text-lg">Go + Wails + SQLite + Vue 3 前端，现代化桌面应用方案</p>
+      </div>
+
+      <!-- 架构图 -->
+      <div class="max-w-3xl mx-auto rounded-2xl bg-background/10 p-8 mb-10">
+        <pre class="text-sm text-secondary-foreground/80 font-mono overflow-x-auto leading-relaxed"><code>{`mini-account-go/
+├── backend/               # Go 后端
+│   ├── db/               # sqlite、migrate 数据库迁移
+│   ├── accounting/       # 会计引擎（复用 GnuAccounting 核心）
+│   ├── contact/          # 客户、供应商、往来余额计算
+│   ├── voucher/          # 凭证 CRUD、借贷校验
+│   ├── bank/             # CSV 流水导入
+│   ├── salary/           # 工资计算模块
+│   ├── expense/          # 报销、发票
+│   └── report/           # 报表、Excel/PDF 导出
+├── frontend/             # Vue3 + shadcn-vue
+│   └── pages/
+│       ├── account/      # 科目
+│       ├── contact/      # 客户 & 供应商
+│       ├── voucher/      # 凭证录入
+│       ├── bankflow/     # 银行流水
+│       ├── report/       # 资产负债、应收应付
+│       ├── salary/       # 工资模块
+│       └── expense/      # 发票报销
+└── wails.json            # Wails 打包配置，输出 exe/app`}</code></pre>
+      </div>
+
+      <!-- 技术栈 -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+        {techStack.map((t) => (
+          <div class="rounded-xl bg-background/10 p-5">
+            <div class="font-bold text-primary mb-1">{t.name}</div>
+            <div class="text-sm text-secondary-foreground/60">{t.desc}</div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Go 依赖 -->
+      <div class="max-w-3xl mx-auto">
+        <h3 class="text-lg font-bold mb-4 text-secondary-foreground/80">Go 推荐依赖库</h3>
+        <div class="space-y-3">
+          {goLibs.map((lib) => (
+            <div class="flex items-start gap-4 p-3 rounded-lg bg-background/5">
+              <code class="text-sm font-mono text-primary shrink-0">{lib.name}</code>
+              <span class="text-sm text-secondary-foreground/60">{lib.desc}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wails 优势 -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-2xl mb-3">⚙️</div>
+          <h3 class="font-bold mb-2">全 Go 后端</h3>
+          <p class="text-sm text-muted-foreground">Web 前端打包成桌面程序，性能卓越</p>
+        </div>
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-2xl mb-3">💾</div>
+          <h3 class="font-bold mb-2">本地文件访问</h3>
+          <p class="text-sm text-muted-foreground">SQLite 本地存储 + 远程 PG 数据库</p>
+        </div>
+        <div class="text-center">
+          <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-2xl mb-3">🔒</div>
+          <h3 class="font-bold mb-2">数据安全</h3>
+          <p class="text-sm text-muted-foreground">完全离线运行，财务数据不出本地</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 lg:py-24 bg-muted/30">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl lg:text-3xl font-bold mb-4">免费开始你的记账之旅</h2>
+      <p class="text-muted-foreground mb-8">无需注册，无需付费，立即下载使用</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#download" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+          下载 MiniAccount
+        </a>
+        <a href="/contact" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg border border-border font-medium hover:bg-muted transition-colors">
+          技术咨询
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
