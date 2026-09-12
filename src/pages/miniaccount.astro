@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const version = 'v0.2.0';
-const versionNumber = '0.2.0';
+const version = 'v0.2.1';
+const versionNumber = '0.2.1';
 const buildDate = '2026-09-12';
-const buildTag = '#10';
-const commit = 'e5d21e0';
+const buildTag = '#13';
+const commit = '46d9612';
 const repoUrl = 'https://github.com/zkzn365/miniaccount';
 const downloadBase = `${repoUrl}/releases/download/${version}`;
 
@@ -16,36 +16,36 @@ const downloads = [
     icon: '🪟',
     arch: 'amd64 / x64',
     format: 'ZIP',
-    size: '14.8 MB',
+    size: '14.9 MB',
     desc: 'Windows 10 / 11（64 位）',
     contents: '小账本.exe + miniaccount.exe',
     file: `miniaccount-${versionNumber}-windows-amd64.zip`,
     url: `${downloadBase}/miniaccount-${versionNumber}-windows-amd64.zip`,
-    sha256: 'ffb3e0b5dbc8d7af53c0c36b7e162e2b61f208928791b4ef2eff82ba24d780b9',
+    sha256: '8fd021efdb12ff39aba13b09491029c59987f32afbb68614e83a399c6bf62f93',
   },
   {
     platform: 'macOS',
     icon: '🍎',
     arch: 'Universal（Apple 芯片 / Intel）',
     format: 'ZIP',
-    size: '15.1 MB',
+    size: '16 MB',
     desc: 'macOS 11 及以上',
     contents: '小账本.app + miniaccount',
     file: `miniaccount-${versionNumber}-macos-universal.zip`,
     url: `${downloadBase}/miniaccount-${versionNumber}-macos-universal.zip`,
-    sha256: '8a0bdab9d29db2d48371d754ba0f767d6ae61ea57a9445a1f6993587e1eab9dd',
+    sha256: 'b8e0110e54a1c538c517d74de111252b531bd8ba83112a6dc987ff89ec58de6a',
   },
   {
     platform: 'Linux',
     icon: '🐧',
     arch: 'amd64 / x64',
     format: 'TAR.GZ',
-    size: '14.3 MB',
+    size: '14.4 MB',
     desc: 'Ubuntu / Debian 等发行版（64 位）',
     contents: '小账本 + miniaccount + 说明',
     file: `miniaccount-${versionNumber}-linux-amd64.tar.gz`,
     url: `${downloadBase}/miniaccount-${versionNumber}-linux-amd64.tar.gz`,
-    sha256: '1b42d3db218752cea40e10bd632ab830522e759ca771f9990da026ea01ac5779',
+    sha256: '61e271d29fa52ff39be8523d9dcde627836add4fd33f45d3bf554e2c51b0f82e',
   },
 ];
 
@@ -191,10 +191,19 @@ const techStack = [
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium mb-6">
-            <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            免费开源 · MIT 许可 · {version}
-          </span>
+          <div class="flex items-center gap-4 mb-6">
+            <img
+              src="/miniaccount-icon-256.png"
+              alt="小账本 Mini Account 应用图标"
+              width="256"
+              height="256"
+              class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl shadow-2xl ring-1 ring-white/20 shrink-0"
+            />
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              免费开源 · MIT 许可 · {version}
+            </span>
+          </div>
           <h1 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
             小账本<br />
             <span class="text-primary">Mini Account</span>
@@ -327,7 +336,16 @@ const techStack = [
         <!-- 规格信息 -->
         <aside class="lg:col-span-1">
           <div class="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
-            <h3 class="font-bold text-lg mb-4 text-deep-green">软件信息</h3>
+            <div class="flex items-center gap-3 mb-4">
+              <img
+                src="/miniaccount-icon-160.png"
+                alt=""
+                width="160"
+                height="160"
+                class="w-10 h-10 rounded-lg shrink-0"
+              />
+              <h3 class="font-bold text-lg text-deep-green">软件信息</h3>
+            </div>
             <dl class="space-y-4">
               {specs.map((s) => (
                 <div class="border-b border-border last:border-0 pb-3 last:pb-0">
@@ -600,6 +618,13 @@ const techStack = [
   <!-- CTA -->
   <section class="py-16 lg:py-24 bg-cream/30">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <img
+        src="/miniaccount-icon-160.png"
+        alt="小账本 Mini Account 应用图标"
+        width="160"
+        height="160"
+        class="w-16 h-16 rounded-2xl mx-auto mb-6 shadow-lg"
+      />
       <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-deep-green">免费开始你的记账之旅</h2>
       <p class="text-muted-foreground mb-8">无需注册，无需付费，三平台任选，下载即用；也可以先一键生成演示账套看看效果</p>
       <div class="flex flex-wrap justify-center gap-4">
