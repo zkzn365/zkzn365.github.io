@@ -1,0 +1,597 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const site = 'https://takegem.com';
+const pricingUrl = `${site}/pricing`;
+const termsUrl = `${site}/terms`;
+const privacyUrl = `${site}/privacy`;
+
+// 核心能力
+const capabilities = [
+  {
+    icon: '💬',
+    title: 'Agent 多轮追问',
+    desc: 'AI 主动追问缺失细节，最多 5 轮，把「随便来张图」收敛成可执行的出图方案，不需要你会写提示词。',
+  },
+  {
+    icon: '✍️',
+    title: '专业提示词生成',
+    desc: '按场景模板自动产出正向 / 负向提示词，生成前可查看、可手动微调，越用越懂你的偏好。',
+  },
+  {
+    icon: '🖼️',
+    title: '文生图 · 参考图生图',
+    desc: '双链路支持：一句话从零出图，或上传参考图做商品重绘、白底图、质感升级。',
+  },
+  {
+    icon: '⚡',
+    title: '异步任务 · 实时进度',
+    desc: '生成任务驱动式执行，进度实时推送，完成即可预览下载；失败自动重试并返还积分。',
+  },
+  {
+    icon: '🎯',
+    title: '场景模板沉淀',
+    desc: 'PPT、电商、海报三类高频场景的提示词模板已内置，同一批素材风格统一有保障。',
+  },
+  {
+    icon: '👍',
+    title: '生成历史与反馈',
+    desc: '历史记录可回看复用；结果支持 👍 / 👎 反馈，帮助后续生成更贴合你的实际需求。',
+  },
+];
+
+// 工作流程
+const steps = [
+  { n: '1', icon: '💬', title: '描述你的想法', desc: '一句话说清想要的图，或直接上传参考图，无需会写提示词。' },
+  { n: '2', icon: '🤖', title: 'AI 顾问追问补齐', desc: '智能 Agent 主动追问缺失细节（最多 5 轮），把模糊需求收敛成清晰方案。' },
+  { n: '3', icon: '✍️', title: '专业提示词生成', desc: '按场景模板自动产出正向 / 负向提示词，交付前可手动微调。' },
+  { n: '4', icon: '🖼️', title: '一键出图 · 实时进度', desc: '异步任务驱动生成，进度实时推送；失败自动重试并返还积分。' },
+];
+
+// 适用场景
+const scenes = [
+  {
+    icon: '📊',
+    title: 'PPT 配图',
+    desc: '汇报 / 课件配图，干净留白、主体清晰',
+    points: ['干净留白、主体清晰', '场景模板保证成套风格统一', '标准图档位，单张 1 积分'],
+  },
+  {
+    icon: '🛍️',
+    title: '电商商品图',
+    desc: '参考图生图：商品重绘、白底图、质感升级',
+    points: ['上传实拍图作为参考图（i2i）', '商品重绘 / 白底图 / 质感升级', '适合详情页与主图批量产出'],
+  },
+  {
+    icon: '🎉',
+    title: '海报宣传',
+    desc: '活动 / 新品海报：主体突出、构图大气',
+    points: ['活动 / 新品海报一键产出', '主体突出、构图大气', '支持 2K 高清与 4K 超清档位'],
+  },
+];
+
+// 订阅套餐（官网定价页标注为上线预告）
+const plans = [
+  {
+    name: 'Lite 轻量版',
+    for: '个人 PPT、轻度创作',
+    price: '¥29',
+    unit: '/ 连续包月',
+    original: '原价 ¥35 · 年付折合 ¥23/月',
+    quota: '30 次生成 / 月',
+    per: '单张摊薄 ≈0.97 元/张',
+    featured: false,
+  },
+  {
+    name: 'Pro 专业版',
+    for: '电商、自媒体高频产出',
+    price: '¥85',
+    unit: '/ 连续包月',
+    original: '原价 ¥99 · 年付折合 ¥68/月',
+    quota: '100 次生成 / 月',
+    per: '单张摊薄 ≈0.85 元/张',
+    featured: true,
+  },
+  {
+    name: 'Business 商业版',
+    for: '工作室批量素材，优先客服',
+    price: '¥159',
+    unit: '/ 连续包月',
+    original: '原价 ¥189 · 年付折合 ¥127/月',
+    quota: '200 次生成 / 月',
+    per: '单张摊薄 ≈0.80 元/张',
+    featured: false,
+  },
+];
+
+// 按量充值包
+const topups = [
+  { pay: '¥50', credit: '50 积分', per: '1.00 元/张' },
+  { pay: '¥199', credit: '220 积分', per: '0.90 元/张' },
+  { pay: '¥499', credit: '620 积分', per: '0.80 元/张' },
+];
+
+// 积分档位
+const creditTiers = [
+  { kind: '标准图', cost: '1 积分 / 张' },
+  { kind: '2K 高清', cost: '2 积分 / 张' },
+  { kind: '4K 超清', cost: '4 积分 / 张' },
+];
+
+// 计费规则
+const billingFaq = [
+  { q: '每月额度如何发放？', a: '按每月购买日期发放套餐额度；当月未用完即清零，不滚存。' },
+  { q: '额度用完后还能继续生成吗？', a: '可以。会员身份保留，超出额度后自动扣「充值通用积分」继续生成。' },
+  { q: '哪些操作会扣积分？', a: 'Agent 对话、需求解析、提示词生成均不扣费；只有图片成功生成才按档扣积分。' },
+  { q: '生成失败会扣积分吗？', a: '不会。生成失败或上游 API 报错时积分自动退回（因内容违规导致的失败除外）。' },
+  { q: '充值积分有效期多久？', a: '充值通用积分有效期 12 个月，不按月清零；订阅超额时自动抵扣。' },
+];
+
+// 产品信息
+const specs = [
+  { label: '产品名称', value: 'TakeGem 拓晶' },
+  { label: '产品定位', value: '智能 Agent 图像生成平台' },
+  { label: '官网', value: 'takegem.com' },
+  { label: '使用方式', value: '网页端在线服务，无需安装客户端' },
+  { label: '核心链路', value: '文生图 · 参考图生图（i2i）' },
+  { label: '参考图规格', value: 'JPEG / PNG / WebP，单张 ≤ 5MB' },
+  { label: '计费方式', value: '积分制，按张计费（1 / 2 / 4 积分）' },
+  { label: '新用户权益', value: '注册即送 5 积分体验额度' },
+  { label: '当前状态', value: '服务运行中；订阅与充值即将开放' },
+];
+
+// 使用须知
+const notices = [
+  '登录与注册：支持手机号 + 短信验证码（首次登录自动创建账号并发放体验积分），也支持邮箱注册。',
+  '账号安全：密码以 bcrypt 加盐哈希存储，无法还原明文；登录凭证保存在浏览器本地，默认有效期 7 天。',
+  '忘记密码：当前未开放邮箱验证与自助找回，需通过客服邮箱联系并按身份核验流程处理。',
+  '参考图限制：单张不超过 5MB，仅支持 JPEG、PNG、WebP 格式；超出限制的请求会被拒绝。',
+  '内容审核：对话文本与提交生成时的提示词先经文本安全审核再交由模型处理；上传参考图目前不做上传前的图片安全审核。',
+  '积分规则：注册体验积分同一账号仅发放一次；积分不可提现、不可转让、不可兑换现金。',
+  '开放节奏：当前阶段会员订阅与积分充值尚未开放，定价页展示的套餐与充值包为上线预告，购买入口未开放。',
+  '服务依赖：出图需调用第三方模型服务，相关服务不可用时出图功能可能暂时不可用，平台会尽力恢复并在页面给出提示。',
+  '生成结果由人工智能模型产出，可能存在偏差或错误，用于商业发布前建议人工复核。',
+];
+---
+
+<Layout
+  title="TakeGem 拓晶 - 智能 Agent 图像生成平台 | 中科智农"
+  description="TakeGem 拓晶（takegem.com）是中科智农推出的 AI 图像生成平台：由 Agent 多轮对话追问补齐需求，自动生成专业提示词，一键产出 PPT 配图、电商商品图与商业海报。支持文生图与参考图生图，积分制按张计费，注册即送体验积分。"
+>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-deep-green to-deep-green/90 text-white">
+    <div class="absolute inset-0 opacity-10" style="background-image: linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="flex items-center gap-4 mb-6">
+            <span class="flex size-16 lg:size-20 items-center justify-center rounded-2xl bg-emerald-100 text-3xl lg:text-4xl shadow-2xl ring-1 ring-white/20 shrink-0">🎨</span>
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/20 text-primary text-sm font-medium">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              智能 Agent 图像生成平台
+            </span>
+          </div>
+          <h1 class="text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+            TakeGem<br />
+            <span class="text-primary">拓晶</span>
+          </h1>
+          <p class="text-lg lg:text-xl text-primary/90 font-medium mb-6">
+            把想法说清楚，剩下的交给 AI
+          </p>
+          <p class="text-lg text-white/70 mb-8 leading-relaxed">
+            不用精通提示词——AI 主动追问补齐你的全部需求，一键产出 PPT 配图、电商商品图、商业物料。
+            单张低成本生成，告别反复调参试错。
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a href={site} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+              访问 takegem.com
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+            <a href="#how" class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/30 text-white font-medium hover:bg-white/10 transition-colors">
+              看看怎么工作
+            </a>
+          </div>
+          <p class="text-sm text-white/50 mt-5">
+            注册即送 5 积分体验额度 · 文生图与参考图生图双链路 · 无水印、可商用
+          </p>
+        </div>
+
+        <!-- Agent 对话示意 -->
+        <div class="relative">
+          <div class="rounded-2xl bg-background/95 p-2 shadow-2xl">
+            <div class="rounded-xl overflow-hidden bg-muted">
+              <div class="flex items-center gap-2 px-4 py-3 border-b border-border bg-card">
+                <span class="flex size-6 items-center justify-center rounded-md bg-emerald-100 text-xs">🎨</span>
+                <span class="text-xs text-muted-foreground">TakeGem 拓晶 — 出图流程示意</span>
+              </div>
+              <div class="p-4 space-y-3 text-sm">
+                <div class="flex justify-end">
+                  <div class="max-w-[85%] p-3 rounded-2xl rounded-br-sm bg-primary/15 text-foreground">
+                    给新品发布会做一张主视觉海报
+                  </div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="max-w-[90%] p-3 rounded-2xl rounded-bl-sm bg-background">
+                    <div class="text-xs text-muted-foreground mb-1">AI 顾问 · 追问 1/5</div>
+                    画面主体是产品本身，还是使用场景中的人物？
+                  </div>
+                </div>
+                <div class="flex justify-end">
+                  <div class="max-w-[85%] p-3 rounded-2xl rounded-br-sm bg-primary/15 text-foreground">
+                    产品特写，深绿主色调，右上留白放标题
+                  </div>
+                </div>
+                <div class="flex justify-start">
+                  <div class="max-w-[90%] p-3 rounded-2xl rounded-bl-sm bg-background">
+                    <div class="text-xs text-muted-foreground mb-1">AI 顾问 · 需求已收敛 ✓</div>
+                    已生成正向 / 负向提示词，可手动微调后提交
+                  </div>
+                </div>
+                <div class="p-3 rounded-xl bg-background border border-border">
+                  <div class="flex items-center justify-between text-xs mb-2">
+                    <span class="text-muted-foreground">出图任务 · 2K 高清</span>
+                    <span class="text-primary font-medium">生成中 68%</span>
+                  </div>
+                  <div class="h-2 rounded-full bg-muted overflow-hidden">
+                    <div class="h-full w-[68%] rounded-full bg-primary"></div>
+                  </div>
+                  <div class="flex items-center justify-between text-xs text-muted-foreground mt-2">
+                    <span>失败自动重试并返还积分</span>
+                    <span>2 积分 / 张</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute -top-4 -right-4 px-4 py-2 rounded-xl bg-primary text-primary-foreground text-sm font-bold shadow-lg rotate-3">
+            按张计费
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 产品简介 -->
+  <section id="intro" class="py-16 lg:py-24 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <span class="inline-block px-3 py-1 rounded-full bg-cream text-primary text-xs font-medium mb-4">产品简介</span>
+          <h2 class="text-3xl lg:text-4xl font-bold mb-6 text-deep-green">
+            TakeGem 拓晶是什么
+          </h2>
+          <div class="space-y-5 text-muted-foreground leading-relaxed">
+            <p>
+              <strong class="text-foreground">TakeGem 拓晶</strong> 是中科智农推出的 AI 图像生成平台，
+              官网为 <a href={site} target="_blank" rel="noopener" class="text-primary hover:underline font-medium">takegem.com</a>。
+              它把「写提示词」这件事交给 Agent：你只需要用一句话说清想法，或直接上传一张参考图，
+              平台会由 AI 顾问主动追问缺失的细节（最多 5 轮），把模糊需求收敛成清晰、可执行的出图方案，
+              再按场景模板生成专业的正向 / 负向提示词。
+            </p>
+            <p>
+              平台支持<strong class="text-foreground">文生图与参考图生图（i2i）双链路</strong>：
+              既可以从零生成 PPT 配图、商业海报，也可以上传实拍商品图做重绘、白底图与质感升级。
+              生成走<strong class="text-foreground">异步任务</strong>，进度实时推送，完成即可预览下载；
+              结果可 👍 / 👎 反馈，帮助后续生成越来越贴合你的偏好。
+            </p>
+            <p>
+              计费方式为<strong class="text-foreground">积分制、按张计费</strong>：标准图 1 积分/张、2K 高清 2 积分/张、4K 超清 4 积分/张。
+              Agent 对话、需求解析与提示词生成都不消耗积分，只有图片成功生成才结算；
+              生成前预扣、失败自动返还，不花冤枉钱。注册即送 5 积分体验额度，可以先试再决定。
+            </p>
+            <p>
+              全程在浏览器里完成，无需安装任何客户端；输出<strong class="text-foreground">无水印、可用于商业用途</strong>，
+              适合需要稳定、低成本、批量出图的团队与个人创作者。
+            </p>
+          </div>
+
+          <h3 class="text-xl font-bold text-deep-green mt-10 mb-5">适合谁用</h3>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="flex gap-3 p-4 rounded-xl border border-border bg-card">
+              <span class="text-2xl shrink-0">📑</span>
+              <div>
+                <div class="font-bold mb-1">汇报与课件制作</div>
+                <p class="text-sm text-muted-foreground leading-relaxed">需要成套、风格统一的配图，又不想在素材站里翻找与调参。</p>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4 rounded-xl border border-border bg-card">
+              <span class="text-2xl shrink-0">🛒</span>
+              <div>
+                <div class="font-bold mb-1">电商运营与商家</div>
+                <p class="text-sm text-muted-foreground leading-relaxed">主图、详情页、白底图需要批量产出，实拍图希望快速升级质感。</p>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4 rounded-xl border border-border bg-card">
+              <span class="text-2xl shrink-0">📣</span>
+              <div>
+                <div class="font-bold mb-1">市场与新媒体</div>
+                <p class="text-sm text-muted-foreground leading-relaxed">活动海报、公众号与社媒配图更新频繁，需要低成本出图能力。</p>
+              </div>
+            </div>
+            <div class="flex gap-3 p-4 rounded-xl border border-border bg-card">
+              <span class="text-2xl shrink-0">🎨</span>
+              <div>
+                <div class="font-bold mb-1">设计与创意工作者</div>
+                <p class="text-sm text-muted-foreground leading-relaxed">想把 AI 当作起草工具：先出方向，再在提示词上做精细微调。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 产品信息 -->
+        <aside class="lg:col-span-1">
+          <div class="rounded-2xl border border-border bg-card p-6 lg:sticky lg:top-24">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex size-10 items-center justify-center rounded-lg bg-emerald-100 text-lg shrink-0">🎨</span>
+              <h3 class="font-bold text-lg text-deep-green">产品信息</h3>
+            </div>
+            <dl class="space-y-4">
+              {specs.map((s) => (
+                <div class="border-b border-border last:border-0 pb-3 last:pb-0">
+                  <dt class="text-xs text-muted-foreground mb-1">{s.label}</dt>
+                  <dd class="text-sm font-medium text-foreground break-words">{s.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <a
+              href={site}
+              target="_blank"
+              rel="noopener"
+              class="mt-6 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-muted transition-colors"
+            >
+              打开 takegem.com
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 怎么工作 -->
+  <section id="how" class="py-16 lg:py-24 bg-cream/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full bg-cream text-primary text-xs font-medium mb-4">怎么工作</span>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-deep-green">四步，从一句话到一张图</h2>
+        <p class="text-muted-foreground text-lg">提示词不再是门槛，而是 AI 与你的对话产物</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {steps.map((s) => (
+          <div class="relative rounded-2xl border border-border bg-card p-6 hover:shadow-lg hover:border-primary/50 transition-all duration-300">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary font-bold">{s.n}</span>
+              <span class="text-2xl">{s.icon}</span>
+            </div>
+            <h3 class="font-bold mb-2 text-deep-green">{s.title}</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 适用场景 -->
+  <section class="py-16 lg:py-24 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full bg-cream text-primary text-xs font-medium mb-4">适用场景</span>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-deep-green">三类高频出图需求</h2>
+        <p class="text-muted-foreground text-lg">覆盖日常工作中最耗时、最需要成套风格的三类图片生产</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {scenes.map((s) => (
+          <div class="rounded-2xl border border-border bg-card p-8 hover:shadow-lg hover:border-primary/50 transition-all duration-300">
+            <div class="size-14 rounded-xl bg-cream flex items-center justify-center mb-5">
+              <span class="text-3xl">{s.icon}</span>
+            </div>
+            <h3 class="text-xl font-bold mb-2 text-deep-green">{s.title}</h3>
+            <p class="text-sm text-muted-foreground mb-5">{s.desc}</p>
+            <ul class="space-y-2">
+              {s.points.map((p) => (
+                <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 核心能力 -->
+  <section class="py-16 lg:py-24 bg-cream/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <span class="inline-block px-3 py-1 rounded-full bg-cream text-primary text-xs font-medium mb-4">核心能力</span>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-deep-green">Agent 不只是「套壳出图」</h2>
+        <p class="text-muted-foreground text-lg">从理解需求、生成提示词到出图交付，每一环都为降低试错成本设计</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {capabilities.map((c) => (
+          <div class="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+            <div class="size-12 rounded-xl bg-cream flex items-center justify-center mb-4">
+              <span class="text-2xl">{c.icon}</span>
+            </div>
+            <h3 class="font-bold mb-2 text-deep-green">{c.title}</h3>
+            <p class="text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 计费与积分 -->
+  <section id="pricing" class="py-16 lg:py-24 bg-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <span class="inline-block px-3 py-1 rounded-full bg-cream text-primary text-xs font-medium mb-4">计费与积分</span>
+        <h2 class="text-3xl lg:text-4xl font-bold mb-4 text-deep-green">按张计费，单张低成本</h2>
+        <p class="text-muted-foreground text-lg">生成前预扣、成功出图才结算，失败自动返还积分</p>
+      </div>
+
+      <!-- 上线预告提示 -->
+      <div class="max-w-4xl mx-auto mb-10 flex items-start gap-3 rounded-xl border border-primary/30 bg-primary/5 p-4">
+        <span class="text-xl shrink-0">📌</span>
+        <p class="text-sm text-muted-foreground leading-relaxed">
+          <strong class="text-foreground">当前阶段说明：</strong>
+          会员订阅与积分充值<strong class="text-foreground">尚未开放</strong>，下方套餐与充值包为官网定价页展示的
+          <strong class="text-foreground">上线预告</strong>（购买入口未开放）。现阶段实际可用的是注册赠送的 5 积分体验额度，
+          套餐额度的发放规则、有效期与价格以官网实时展示为准。
+        </p>
+      </div>
+
+      <!-- 套餐 -->
+      <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {plans.map((p) => (
+          <div class={`relative flex flex-col rounded-2xl border bg-card p-8 transition-all duration-300 ${p.featured ? 'border-primary shadow-lg' : 'border-border hover:border-primary/50 hover:shadow-lg'}`}>
+            {p.featured && (
+              <span class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                推荐
+              </span>
+            )}
+            <h3 class="text-lg font-bold text-deep-green">{p.name}</h3>
+            <p class="text-sm text-muted-foreground mb-5">{p.for}</p>
+            <div class="flex items-end gap-1 mb-1">
+              <span class="text-3xl font-bold text-deep-green">{p.price}</span>
+              <span class="text-sm text-muted-foreground mb-1">{p.unit}</span>
+            </div>
+            <p class="text-xs text-muted-foreground mb-5">{p.original}</p>
+            <div class="space-y-2 mb-6 text-sm">
+              <div class="flex items-center gap-2 text-muted-foreground">
+                <span class="px-2 py-0.5 rounded bg-muted text-xs">额度</span>
+                {p.quota}
+              </div>
+              <div class="flex items-center gap-2 text-muted-foreground">
+                <span class="px-2 py-0.5 rounded bg-muted text-xs">摊薄</span>
+                {p.per}
+              </div>
+            </div>
+            <span class="mt-auto inline-flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-muted text-muted-foreground text-sm font-medium">
+              即将上线
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- 权益与充值包 -->
+      <div class="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto mt-10">
+        <div class="rounded-2xl border border-border bg-card p-8">
+          <h3 class="font-bold text-lg mb-4 text-deep-green">各档套餐权益</h3>
+          <ul class="space-y-2.5">
+            {['无水印输出', '商业授权、可用于商业用途', 'Agent 多轮对话全能力', '优先生成队列', 'PPT / 电商全套提示词模板'].map((b) => (
+              <li class="flex items-start gap-2 text-sm text-muted-foreground">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+                {b}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6 pt-6 border-t border-border">
+            <h4 class="font-bold text-sm mb-3 text-foreground">积分扣费档位</h4>
+            <div class="space-y-2">
+              {creditTiers.map((t) => (
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-muted-foreground">{t.kind}</span>
+                  <span class="font-medium text-foreground">{t.cost}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-border bg-card p-8">
+          <h3 class="font-bold text-lg mb-1 text-deep-green">按量充值包</h3>
+          <p class="text-sm text-muted-foreground mb-5">通用积分 12 个月有效 · 订阅超额自动抵扣 · 不按月清零</p>
+          <div class="space-y-3">
+            {topups.map((t) => (
+              <div class="flex items-center justify-between p-3 rounded-lg bg-muted/50">
+                <span class="font-bold text-deep-green">{t.pay}</span>
+                <span class="text-sm text-muted-foreground">{t.credit}</span>
+                <span class="text-sm font-medium text-foreground">{t.per}</span>
+              </div>
+            ))}
+          </div>
+          <p class="text-xs text-muted-foreground mt-5">
+            充值包同样为上线预告。注册即送的体验积分与充值积分均为一次性发放 / 按量购买，不可提现、不可转让。
+          </p>
+        </div>
+      </div>
+
+      <!-- 计费规则 -->
+      <div class="max-w-5xl mx-auto mt-10 rounded-2xl border border-border bg-card p-8">
+        <h3 class="font-bold text-lg mb-5 text-deep-green">计费规则说明</h3>
+        <div class="grid md:grid-cols-2 gap-x-8 gap-y-5">
+          {billingFaq.map((f) => (
+            <div>
+              <div class="font-medium text-sm text-foreground mb-1">{f.q}</div>
+              <p class="text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 使用须知 -->
+  <section class="py-16 lg:py-20 bg-cream/30">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl border border-border bg-card p-8 lg:p-10">
+        <h2 class="text-xl font-bold mb-2 text-deep-green">使用须知</h2>
+        <p class="text-sm text-muted-foreground mb-6">
+          开始使用前值得先了解的几条，均来自平台官方说明：
+        </p>
+        <ul class="space-y-3">
+          {notices.map((item, i) => (
+            <li class="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed">
+              <span class="shrink-0 size-6 rounded-full bg-cream text-primary text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8 pt-6 border-t border-border flex flex-wrap gap-4 text-sm">
+          <a href={pricingUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-primary hover:underline font-medium">
+            官方定价页 →
+          </a>
+          <a href={termsUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+            用户协议
+          </a>
+          <a href={privacyUrl} target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors">
+            隐私政策
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 lg:py-24 bg-background">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="flex size-16 items-center justify-center rounded-2xl bg-emerald-100 text-3xl mx-auto mb-6 shadow-lg">🎨</span>
+      <h2 class="text-2xl lg:text-3xl font-bold mb-4 text-deep-green">把想法说清楚，剩下的交给 AI</h2>
+      <p class="text-muted-foreground mb-8">
+        注册即送 5 积分体验额度，无需付费即可先出一张图看看效果。
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href={site} target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+          前往 takegem.com 体验
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+        <a href="/contact" class="inline-flex items-center gap-2 px-8 py-3 rounded-lg border border-border font-medium hover:bg-muted transition-colors">
+          企业合作咨询
+        </a>
+      </div>
+      <p class="text-xs text-muted-foreground mt-6">
+        需要私有化部署、团队批量额度或行业定制模板？联系我们获取支持。
+      </p>
+    </div>
+  </section>
+</Layout>
