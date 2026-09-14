@@ -78,8 +78,8 @@ const plans = [
     price: '¥29',
     unit: '/ 连续包月',
     original: '原价 ¥35 · 年付折合 ¥23/月',
-    quota: '30 次生成 / 月',
-    per: '单张摊薄 ≈0.97 元/张',
+    quota: '58 次生成 / 月',
+    per: '单张摊薄 ≈0.50 元/张',
     featured: false,
   },
   {
@@ -88,8 +88,8 @@ const plans = [
     price: '¥85',
     unit: '/ 连续包月',
     original: '原价 ¥99 · 年付折合 ¥68/月',
-    quota: '100 次生成 / 月',
-    per: '单张摊薄 ≈0.85 元/张',
+    quota: '154 次生成 / 月',
+    per: '单张摊薄 ≈0.55 元/张',
     featured: true,
   },
   {
@@ -98,8 +98,8 @@ const plans = [
     price: '¥159',
     unit: '/ 连续包月',
     original: '原价 ¥189 · 年付折合 ¥127/月',
-    quota: '200 次生成 / 月',
-    per: '单张摊薄 ≈0.80 元/张',
+    quota: '353 次生成 / 月',
+    per: '单张摊薄 ≈0.45 元/张',
     featured: false,
   },
 ];
@@ -120,6 +120,7 @@ const creditTiers = [
 
 // 计费规则
 const billingFaq = [
+  { q: '每周能免费领积分吗？', a: '可以。从注册日起每 7 天，登录后可在创作台免费领取 5 积分；当周未领取即过期，不累积、不补领。' },
   { q: '每月额度如何发放？', a: '按每月购买日期发放套餐额度；当月未用完即清零，不滚存。' },
   { q: '额度用完后还能继续生成吗？', a: '可以。会员身份保留，超出额度后自动扣「充值通用积分」继续生成。' },
   { q: '哪些操作会扣积分？', a: 'Agent 对话、需求解析、提示词生成均不扣费；只有图片成功生成才按档扣积分。' },
@@ -136,7 +137,7 @@ const specs = [
   { label: '核心链路', value: '文生图 · 参考图生图（i2i）' },
   { label: '参考图规格', value: 'JPEG / PNG / WebP，单张 ≤ 5MB' },
   { label: '计费方式', value: '积分制，按张计费（1 / 2 / 4 积分）' },
-  { label: '新用户权益', value: '注册即送 5 积分体验额度' },
+  { label: '新用户权益', value: '注册即送 5 积分；每周可再免费领 5 积分' },
   { label: '当前状态', value: '服务运行中；订阅与充值即将开放' },
 ];
 
@@ -147,7 +148,7 @@ const notices = [
   '忘记密码：当前未开放邮箱验证与自助找回，需通过客服邮箱联系并按身份核验流程处理。',
   '参考图限制：单张不超过 5MB，仅支持 JPEG、PNG、WebP 格式；超出限制的请求会被拒绝。',
   '内容审核：对话文本与提交生成时的提示词先经文本安全审核再交由模型处理；上传参考图目前不做上传前的图片安全审核。',
-  '积分规则：注册体验积分同一账号仅发放一次；积分不可提现、不可转让、不可兑换现金。',
+  '积分规则：注册赠送的 5 积分同一账号仅发放一次；此外每 7 天可在工作台免费领取 5 积分，当期未领取即失效，不累积、不补发；所有积分均不可提现、不可转让、不可兑换现金。',
   '开放节奏：当前阶段会员订阅与积分充值尚未开放，定价页展示的套餐与充值包为上线预告，购买入口未开放。',
   '服务依赖：出图需调用第三方模型服务，相关服务不可用时出图功能可能暂时不可用，平台会尽力恢复并在页面给出提示。',
   '生成结果由人工智能模型产出，可能存在偏差或错误，用于商业发布前建议人工复核。',
@@ -194,7 +195,7 @@ const notices = [
             </a>
           </div>
           <p class="text-sm text-white/50 mt-5">
-            注册即送 5 积分体验额度 · 文生图与参考图生图双链路 · 无水印、可商用
+            注册即送 5 积分 · 每周还可免费领 5 积分 · 文生图与参考图生图双链路
           </p>
         </div>
 
@@ -279,7 +280,7 @@ const notices = [
             <p>
               计费方式为<strong class="text-foreground">积分制、按张计费</strong>：标准图 1 积分/张、2K 高清 2 积分/张、4K 超清 4 积分/张。
               Agent 对话、需求解析与提示词生成都不消耗积分，只有图片成功生成才结算；
-              生成前预扣、失败自动返还，不花冤枉钱。注册即送 5 积分体验额度，可以先试再决定。
+              生成前预扣、失败自动返还，不花冤枉钱。注册即送 5 积分体验额度，之后每周还能免费领 5 积分，可以先试再决定。
             </p>
             <p>
               全程在浏览器里完成，无需安装任何客户端；输出<strong class="text-foreground">无水印、可用于商业用途</strong>，
@@ -441,7 +442,7 @@ const notices = [
         <p class="text-sm text-muted-foreground leading-relaxed">
           <strong class="text-foreground">当前阶段说明：</strong>
           会员订阅与积分充值<strong class="text-foreground">尚未开放</strong>，下方套餐与充值包为官网定价页展示的
-          <strong class="text-foreground">上线预告</strong>（购买入口未开放）。现阶段实际可用的是注册赠送的 5 积分体验额度，
+          <strong class="text-foreground">上线预告</strong>（购买入口未开放）。现阶段实际可用的是注册赠送的 5 积分，以及每 7 天可免费领取的 5 积分，
           套餐额度的发放规则、有效期与价格以官网实时展示为准。
         </p>
       </div>
@@ -508,7 +509,13 @@ const notices = [
 
         <div class="rounded-2xl border border-border bg-card p-8">
           <h3 class="font-bold text-lg mb-1 text-deep-green">按量充值包</h3>
-          <p class="text-sm text-muted-foreground mb-5">通用积分 12 个月有效 · 订阅超额自动抵扣 · 不按月清零</p>
+          <p class="text-sm text-muted-foreground mb-4">通用积分 12 个月有效 · 订阅超额自动抵扣 · 不按月清零</p>
+          <div class="flex items-start gap-2 rounded-lg border border-primary/30 bg-primary/5 p-3 mb-5">
+            <span class="shrink-0">🎁</span>
+            <p class="text-xs text-muted-foreground leading-relaxed">
+              <strong class="text-foreground">每周免费领 5 积分：</strong>从注册日起每 7 天一次，登录后在创作台点「领取」即可；当周未领取即过期（不累积、不补发）。
+            </p>
+          </div>
           <div class="space-y-3">
             {topups.map((t) => (
               <div class="flex items-center justify-between p-3 rounded-lg bg-muted/50">
@@ -519,7 +526,7 @@ const notices = [
             ))}
           </div>
           <p class="text-xs text-muted-foreground mt-5">
-            充值包同样为上线预告。注册即送的体验积分与充值积分均为一次性发放 / 按量购买，不可提现、不可转让。
+            充值包同样为上线预告。注册赠送与每周领取的体验积分，以及按量购买的充值积分，均不可提现、不可转让、不可兑换现金。
           </p>
         </div>
       </div>
